@@ -15,7 +15,7 @@ class Voo(models.Model):
     def __str__(self):
         return self.codigo
 
-class CaracteristicasReais(models.Model):
+class VooReal(models.Model):
     status_choices = (
         (0, ""),
         (-1, "Cancelado"),
@@ -35,8 +35,8 @@ class CaracteristicasReais(models.Model):
     chegada_real = models.TimeField(null=True, blank=True)
 
     class Meta:
-        verbose_name = "Caracteristicas Reais"
-        verbose_name_plural = "Caracteristicas Reais"
+        verbose_name = "Voo Real"
+        verbose_name_plural = "Voos Reais"
         constraints = [models.UniqueConstraint(fields=["voo", "dia"], name="unique_voo_dia")]
 
     def __str__(self):
