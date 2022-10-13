@@ -4,4 +4,13 @@ from django.shortcuts import render
 
 
 def bookview(request):
-    return render(request, "FIRST.html")
+    return render(request, "telaDeSelecao.html")
+
+def areaDoOperador(request):
+    return render(request, "areaDoOperador.html")
+
+def areaDoFuncionario(request):
+    return render(request, "areaDoFuncionario.html")
+
+def areaDoGerente(request):
+    return render(request, "areaDoGerente.html")

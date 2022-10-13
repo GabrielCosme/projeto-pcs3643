@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Área do gerente</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Sistema de monitoramento</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Área do gerente</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+        <div class="jumbotron">
+          <h3 class="display-4"> Gerador de relatórios</h3>
+            <p class="lead">Selecione os filtros relevantes</p>
+            <hr class="my-4">
+
+        </div>
+    </div>
+
+
+    <div class="container">
+      <div class="jumbotron">
+
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Data de início</label>
+            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Data de fim</label>
+            <input type="date" class="form-control" id="exampleInputPassword1" >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Companhia Aerea</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" >
+          </div>
+          <br></br>
+          <button type="submit" class="btn btn-primary">Gerar relatório</button>
+        </form>
+
+
+      </div>
+    </div>
+
+   
+</body>
+
+</html>
