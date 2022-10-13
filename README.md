@@ -64,3 +64,6 @@ Nesta aula foi realizada a construção inicial do repositório e foi feito o es
 ## Aula de desenvolvimento 2:
 
 Nesta aula foi feita a criação do modelo de dados do projeto, bem como um CRUD rudimentar e os testes relativos a seu funcionamento. Além disso, os diagramas foram refatorados visando corrigi-los.
+
+## Aula de desenvolvimento 3:
+Nesta aula foi adicionada uma interface front end para login e navegação no site, criando o template para o CRUD dos Voos, para o monitoramento de voos e geração de relatório, mas sem as funcionalidades de fato. Além disso, foi desenvolvido um Modelo de Inteface - Navegação para o projeto.
