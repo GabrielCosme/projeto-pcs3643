@@ -32,4 +32,5 @@ urlpatterns = [
     path("areaDoOperador/", book_views.areaDoOperador),
     path("areaDoFuncionario/", book_views.areaDoFuncionario),
     path("areaDoGerente/", book_views.areaDoGerente),
+    
 ]
