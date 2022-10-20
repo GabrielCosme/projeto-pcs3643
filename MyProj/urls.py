@@ -15,9 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from book import views
+from book import views as book_views
+from django.contrib.auth import views as auth_views
+from myapp import views as myapp_views
 
 urlpatterns = [
+    path("admin/login/", auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path("admin/", admin.site.urls),
-    path("", views.bookview),
+    path("", book_views.bookview),
+    path("atualizarVooReal/", myapp_views.atualizarVooReal),
+    path("cadastrarVoo/", myapp_views.cadastrarVoo),
+    path("consultarVoo/", myapp_views.consultarVoo),
+    path("deletarVoo/", myapp_views.deletarVoo),
+    path("editarVoo/", myapp_views.editarVoo),
+    path("relatorioVoos/", myapp_views.relatorioVoos),
+    path("areaDoOperador/", book_views.areaDoOperador),
+    path("areaDoFuncionario/", book_views.areaDoFuncionario),
+    path("areaDoGerente/", book_views.areaDoGerente),
+    
 ]

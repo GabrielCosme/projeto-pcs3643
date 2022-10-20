@@ -57,6 +57,18 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+## Como acessar as páginas:
+
+Você pode usar os botões de navegação para navegar livremente e clicando no botão da navbar "Sistema de monitoramento", você será levado à pagina de seleção novamente, porém, também é possível navegar diretamente através dos links:
+
+| URL | Descrição |
+| --- | --- |
+| / | Página inicial |
+| /admin/ | Página de administração |
+| /areaDoFuncionario/ | Página de área do funcionário |
+| /areaDoGerente/ | Página de área do gerente |
+| /areaDoOperador/ | Página de área do administrador |
+
 ## Aula de desenvolvimento 1:
 
 Nesta aula foi realizada a construção inicial do repositório e foi feito o esqueleto dos diretórios, tão como definida a direção futura do projeto.'
@@ -64,3 +76,6 @@ Nesta aula foi realizada a construção inicial do repositório e foi feito o es
 ## Aula de desenvolvimento 2:
 
 Nesta aula foi feita a criação do modelo de dados do projeto, bem como um CRUD rudimentar e os testes relativos a seu funcionamento. Além disso, os diagramas foram refatorados visando corrigi-los.
+
+## Aula de desenvolvimento 3:
+Nesta aula foi adicionada uma interface front end para login e navegação no site, criando o template para o CRUD dos Voos, para o monitoramento de voos e geração de relatório, mas sem as funcionalidades de fato. Além disso, foi desenvolvido um Modelo de Inteface - Navegação para o projeto.
