@@ -1,2 +1,101 @@
-<h1>Essa é a tela para editar Voos.</h1>
-<a href="/areaDoOperador/">Voltar</a>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Área do gerente</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Cadastro de voos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+
+    <div class="container">
+        <div class="jumbotron">
+          <h3 class="display-4"> Editar</h3>
+            <p class="lead">Insira os dados do voo:</p>
+            <hr class="my-4">
+
+        </div>
+    </div>
+
+
+    <div class="container">
+      <div class="jumbotron">
+
+        <form>
+          <div class="form-group">
+                <label for="exampleInputPassword1">Companhia Aerea</label>
+                <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Código de Voo</label>
+            <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Origem</label>
+        <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+  </div>    
+  <div class="form-group">
+    <label for="exampleInputPassword1">Destino</label>
+    <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+</div>
+<div class="form-group">
+    <label for="exampleInputPassword1">Status</label>
+    <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+</div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Horário de partida prevista</label>
+            <input type="time" value = "valor anterior" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            
+            <div class="form-group">
+              <label for="exampleInputEmail1">Dia de partida</label>
+              <input type="date" value = "valor anterior" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+  
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Horário de chegada prevista</label>
+            <input type="time" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Dia de chegada</label>
+            <input type="date" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
+          </div>
+
+          <br></br>
+          <a href="/areaDoOperador/" class="btn btn-primary" >Atualizar</a>
+        </form>
+
+
+      </div>
+    </div>
+
+   
+</body>
+
+</html>

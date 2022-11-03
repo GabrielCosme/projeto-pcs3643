@@ -34,3 +34,4 @@ urlpatterns = [
     path("areaDoGerente/", book_views.areaDoGerente),
     
 ]
+    

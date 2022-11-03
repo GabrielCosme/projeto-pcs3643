@@ -62,7 +62,17 @@
             <td>@mdo</td>
             <td></td>
             <td>
-              </button><a href="/atualizarVooReal" class="btn btn-primary">
+              <select class="select">
+                <option value="1">Embarcando</option>
+                <option value="2">Cancelado</option>
+                <option value="3">Programado</option>
+                <option value="4">Taxiando</option>
+                <option value="5">Pronto</option>
+                <option value="6">Autorizado</option>
+                <option value="7">Em Voo</option>
+                <option value="8">Aterrissado</option>
+              </select> 
+              </button><a onclick="atualizaStatus()" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                   <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -77,7 +87,17 @@
             <td>@fat</td>
             <td>@mdo</td>
             <td>
-            </button><a href="/atualizarVooReal" class="btn btn-primary">
+              <select class="select">
+                <option value="1">Embarcando</option>
+                <option value="2">Cancelado</option>
+                <option value="3">Programado</option>
+                <option value="4">Taxiando</option>
+                <option value="5">Pronto</option>
+                <option value="6">Autorizado</option>
+                <option value="7">Em Voo</option>
+                <option value="8">Aterrissado</option>
+              </select> 
+              </button><a onclick="atualizaStatus()" class="btn btn-primary">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -92,7 +112,17 @@
             <td>@twitter</td>
             <td>@mdo</td>
             <td>
-            </button><a href="/atualizarVooReal" class="btn btn-primary">
+              <select class="select">
+                <option value="1">Embarcando</option>
+                <option value="2">Cancelado</option>
+                <option value="3">Programado</option>
+                <option value="4">Taxiando</option>
+                <option value="5">Pronto</option>
+                <option value="6">Autorizado</option>
+                <option value="7">Em Voo</option>
+                <option value="8">Aterrissado</option>
+              </select> 
+              </button><a onclick="atualizaStatus()" class="btn btn-primary">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -107,5 +137,9 @@
     </div>
 </div>
 </body>
-
+<script>
+  function atualizaStatus() {
+    alert("Voo atualizado com sucesso");
+  }
+</script>
 </html>
