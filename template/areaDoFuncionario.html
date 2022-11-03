@@ -66,6 +66,7 @@
             <td></td>
             <form method="POST" action="/areaDoFuncionario/" id="select">
             {% csrf_token %}
+            <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden> 
             <td>
               <div class="form-group">
                 <select class="form-control" form="select" name="status">

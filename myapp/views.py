@@ -14,7 +14,9 @@ def areaDoOperador(request):
 
 def areaDoFuncionario(request):
     if request.method == "POST":
-        print(request)
+        vooReal = VooReal.objects.get(voo=Voo.objects.get(codigo=request.POST.get("codigo", "")))
+        vooReal.status = request.POST.get("status", "")
+        vooReal.save()
 
     context = {"voosReais": VooReal.objects.all(), "status_dict": VooReal.status_dict}
     return render(request, 'areaDoFuncionario.html', context)
