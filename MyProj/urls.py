@@ -22,16 +22,15 @@ from myapp import views as myapp_views
 urlpatterns = [
     path("admin/login/", auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path("admin/", admin.site.urls),
-    path("", book_views.bookview),
-    path("atualizarVooReal/", myapp_views.atualizarVooReal),
+    path("", myapp_views.bookview),
     path("cadastrarVoo/", myapp_views.cadastrarVoo),
     path("consultarVoo/", myapp_views.consultarVoo),
     path("deletarVoo/", myapp_views.deletarVoo),
     path("editarVoo/", myapp_views.editarVoo),
     path("relatorioVoos/", myapp_views.relatorioVoos),
-    path("areaDoOperador/", book_views.areaDoOperador),
-    path("areaDoFuncionario/", book_views.areaDoFuncionario),
-    path("areaDoGerente/", book_views.areaDoGerente),
+    path("areaDoOperador/", myapp_views.areaDoOperador),
+    path("areaDoFuncionario/", myapp_views.areaDoFuncionario),
+    path("areaDoGerente/", myapp_views.areaDoGerente),
     
 ]
     

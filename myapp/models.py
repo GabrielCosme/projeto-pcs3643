@@ -28,6 +28,8 @@ class VooReal(models.Model):
         (7, "Aterrissado"),
     )
 
+    status_dict = dict(status_choices)
+
     voo = models.ForeignKey(Voo, on_delete=models.CASCADE)
     dia = models.DateField()
     status = models.IntegerField(choices=status_choices, default=0)

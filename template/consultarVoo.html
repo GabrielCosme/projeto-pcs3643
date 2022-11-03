@@ -1,4 +1,5 @@
 {% load static %}
+{% load index %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +35,8 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Voo XXXX</h3>
-            <p class="lead">Consulta detalhada a voo</p>
+          <h3 class="display-4"> Voo {{voo.codigo}}</h3>
+            <p class="lead">Consulta detalhada ao voo</p>
             <hr class="my-4">
 
         </div>
@@ -54,42 +55,35 @@
         <tbody>
           <tr>
             <td><strong>Companhia Aerea</strong></td>
-            <td>LATAM</td>
+            <td>{{voo.companhia_aerea}}</td>
           </tr>
           <tr>
 
             <td><strong>Código de voo</strong></td>
-            <td>XXXX</td>           
+            <td>{{voo.codigo}}</td>           
           </tr>
-          <tr>
-
-            <td><strong>Status</strong></td>
-            <td>Previsto</td>
-          </td>
-          </tr>
-
           <tr>
 
             <td><strong>Origem</strong></td>
-            <td>SP</td>
+            <td>{{voo.origem}}</td>
           </td>
           </tr>
           <tr>
 
             <td><strong>Destino</strong></td>
-            <td>Piraporinha</td>
+            <td>{{voo.destino}}</td>
           </td>
           </tr>
           <tr>
 
             <td><strong>Partida prevista</strong></td>
-            <td>09:00</td>
+            <td>{{voo.partida_prevista}}</td>
           </td>
 
           <tr>
 
             <td><strong>Chegada prevista</strong></td>
-            <td>11:00</td>
+            <td>{{voo.chegada_prevista}}</td>
           </td>
           </tr>
           </tr>
