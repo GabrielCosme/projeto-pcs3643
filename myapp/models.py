@@ -19,13 +19,14 @@ class VooReal(models.Model):
     status_choices = (
         (0, ""),
         (-1, "Cancelado"),
-        (1, "Embarcando"),
-        (2, "Programado"),
-        (3, "Taxiando"),
-        (4, "Pronto"),
-        (5, "Autorizado"),
-        (6, "Em voo"),
-        (7, "Aterrissado"),
+        (1, "Confirmado")
+        (2, "Embarcando"),
+        (3, "Programado"),
+        (4, "Taxiando"),
+        (5, "Pronto"),
+        (6, "Autorizado"),
+        (7, "Em voo"),
+        (8, "Aterrissado"),
     )
 
     status_dict = dict(status_choices)
