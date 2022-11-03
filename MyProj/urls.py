@@ -20,7 +20,11 @@ from django.contrib.auth import views as auth_views
 from myapp import views as myapp_views
 
 urlpatterns = [
-    path("admin/login/", auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path(
+        "admin/login/",
+        auth_views.LoginView.as_view(template_name="login.html"),
+        name="login",
+    ),
     path("admin/", admin.site.urls),
     path("", myapp_views.bookview),
     path("cadastrarVoo/", myapp_views.cadastrarVoo),
@@ -31,6 +35,4 @@ urlpatterns = [
     path("areaDoOperador/", myapp_views.areaDoOperador),
     path("areaDoFuncionario/", myapp_views.areaDoFuncionario),
     path("areaDoGerente/", myapp_views.areaDoGerente),
-    
 ]
-    

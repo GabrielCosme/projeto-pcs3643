@@ -8,42 +8,75 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Voo',
+            name="Voo",
             fields=[
-                ('codigo', models.CharField(max_length=10, primary_key=True, serialize=False)),
-                ('companhia_aerea', models.CharField(max_length=25)),
-                ('origem', models.CharField(max_length=25)),
-                ('destino', models.CharField(max_length=25)),
-                ('partida_prevista', models.TimeField()),
-                ('chegada_prevista', models.TimeField()),
+                (
+                    "codigo",
+                    models.CharField(max_length=10, primary_key=True, serialize=False),
+                ),
+                ("companhia_aerea", models.CharField(max_length=25)),
+                ("origem", models.CharField(max_length=25)),
+                ("destino", models.CharField(max_length=25)),
+                ("partida_prevista", models.TimeField()),
+                ("chegada_prevista", models.TimeField()),
             ],
             options={
-                'verbose_name': 'Voo',
-                'verbose_name_plural': 'Voos',
+                "verbose_name": "Voo",
+                "verbose_name_plural": "Voos",
             },
         ),
         migrations.CreateModel(
-            name='VooReal',
+            name="VooReal",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('dia', models.DateField()),
-                ('status', models.IntegerField(choices=[(0, ''), (-1, 'Cancelado'), (1, 'Embarcando'), (2, 'Programado'), (3, 'Taxiando'), (4, 'Pronto'), (5, 'Autorizado'), (6, 'Em voo'), (7, 'Aterrissado')], default=0)),
-                ('partida_real', models.TimeField(blank=True, null=True)),
-                ('chegada_real', models.TimeField(blank=True, null=True)),
-                ('voo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='myapp.voo')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("dia", models.DateField()),
+                (
+                    "status",
+                    models.IntegerField(
+                        choices=[
+                            (0, ""),
+                            (-1, "Cancelado"),
+                            (1, "Embarcando"),
+                            (2, "Programado"),
+                            (3, "Taxiando"),
+                            (4, "Pronto"),
+                            (5, "Autorizado"),
+                            (6, "Em voo"),
+                            (7, "Aterrissado"),
+                        ],
+                        default=0,
+                    ),
+                ),
+                ("partida_real", models.TimeField(blank=True, null=True)),
+                ("chegada_real", models.TimeField(blank=True, null=True)),
+                (
+                    "voo",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="myapp.voo"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Voo Real',
-                'verbose_name_plural': 'Voos Reais',
+                "verbose_name": "Voo Real",
+                "verbose_name_plural": "Voos Reais",
             },
         ),
         migrations.AddConstraint(
-            model_name='vooreal',
-            constraint=models.UniqueConstraint(fields=('voo', 'dia'), name='unique_voo_dia'),
+            model_name="vooreal",
+            constraint=models.UniqueConstraint(
+                fields=("voo", "dia"), name="unique_voo_dia"
+            ),
         ),
     ]
