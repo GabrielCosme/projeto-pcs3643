@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
@@ -43,56 +42,44 @@
     </div>
 
     <div class="container">
-    <div class="jumbotron">
-    <table class="table">
+        <div class="jumbotron">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><strong>Companhia Aerea</strong></td>
+                        <td>{{voo.companhia_aerea}}</td>
+                    </tr>
 
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Companhia Aerea</strong></td>
-            <td>{{voo.companhia_aerea}}</td>
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Código de voo</strong></td>
+                        <td>{{voo.codigo}}</td>           
+                    </tr>
 
-            <td><strong>Código de voo</strong></td>
-            <td>{{voo.codigo}}</td>           
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Origem</strong></td>
+                        <td>{{voo.origem}}</td>
+                    </tr>
 
-            <td><strong>Origem</strong></td>
-            <td>{{voo.origem}}</td>
-          </td>
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Destino</strong></td>
+                        <td>{{voo.destino}}</td>
+                    </tr>
 
-            <td><strong>Destino</strong></td>
-            <td>{{voo.destino}}</td>
-          </td>
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Partida prevista</strong></td>
+                        <td>{{voo.partida_prevista}}</td>
+                    </tr>
 
-            <td><strong>Partida prevista</strong></td>
-            <td>{{voo.partida_prevista}}</td>
-          </td>
+                    <tr>
+                        <td><strong>Chegada prevista</strong></td>
+                        <td>{{voo.chegada_prevista}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-          <tr>
-
-            <td><strong>Chegada prevista</strong></td>
-            <td>{{voo.chegada_prevista}}</td>
-          </td>
-          </tr>
-          </tr>
-        </tbody>
-      </table>  
-      <a href="/areaDoOperador/" class="btn btn-primary" >Retornar</a>
-
+            <a href="/areaDoOperador/" class="btn btn-primary" >Retornar</a>
+        </div>
     </div>
-</div>
 </body>
 
 </html>

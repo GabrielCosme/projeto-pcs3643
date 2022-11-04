@@ -36,7 +36,7 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Editar</h3>
+          <h3 class="display-4"> Editar Voo {{voo.codigo}}</h3>
             <p class="lead">Insira os dados do voo:</p>
             <hr class="my-4">
 
@@ -47,37 +47,40 @@
     <div class="container">
       <div class="jumbotron">
 
-        <form method="POST" action="/editarVoo/">
-          {% csrf_token %}
-          <div class="form-group">
-                <label for="exampleInputPassword1">Companhia Aerea</label>
-                <input type="text" value = "{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea" >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Código de Voo</label>
-            <input type="text" value = "{{voo.codigo}}" class="form-control" name="codigo" >
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Origem</label>
-        <input type="text" value = "{{voo.origem}}" class="form-control" name="origem" >
-  </div>    
-  <div class="form-group">
-    <label for="exampleInputPassword1">Destino</label>
-    <input type="text" value = "{{voo.destino}}" class="form-control" name="destino" >
-</div>
+        <form method="POST" action="/areaDoOperador/">
+            {% csrf_token %}
 
-          <div class="form-group">
-            <label for="exampleInputEmail1">Horário de partida prevista</label>
-            <input type="time" value = "{{voo.partida_prevista}}" class="form-control" name="horario_partida_prevista" aria-describedby="emailHelp" >
-            
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Horário de chegada prevista</label>
-            <input type="time" value = "{{voo.chegada_prevista}}" class="form-control" name="horario_chegada_prevista" >
-          </div>
+            <input type="text" name="codigo" value="{{voo.codigo}}" hidden>
+            <input type="text" name="operation" value="update" hidden>
 
-          <br></br>
-          <button type="submit" class="btn btn-primary" >Atualizar</button>
+            <div class="form-group">
+                    <label for="exampleInputPassword1">Companhia Aerea</label>
+                    <input type="text" value = "{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Origem</label>
+                <input type="text" value = "{{voo.origem}}" class="form-control" name="origem">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Destino</label>
+                <input type="text" value = "{{voo.destino}}" class="form-control" name="destino">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Horário de partida prevista</label>
+                <input type="time" value = "{{voo.partida_prevista}}" class="form-control" name="horario_partida_prevista">
+                
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Horário de chegada prevista</label>
+                <input type="time" value = "{{voo.chegada_prevista}}" class="form-control" name="horario_chegada_prevista">
+            </div>
+
+            <br></br>
+            <button type="submit" class="btn btn-primary" >Atualizar</button>
         </form>
 
         <br/>
