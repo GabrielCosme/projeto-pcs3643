@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link">Cadastro de voos</a>
+                        <a class="nav-link">Cadastro de Voos Reais</a>
                     </li>
                 </ul>
             </div>
@@ -34,53 +34,40 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Cadastrar voo</h3>
+          <h3 class="display-4"> Cadastrar Voo Real</h3>
             <p class="lead">Insira os dados do voo:</p>
             <hr class="my-4">
-
         </div>
     </div>
 
     <div class="container">
       <div class="jumbotron">
-        <form method="POST" action="/areaDoOperador/">
+        <form method="POST" action="/areaDoFuncionario/">
           {% csrf_token %}
           <input type="text" name="operation" value="create" hidden>
 
+          <label>Código do Voo</label>
+          <td>
           <div class="form-group">
-            <label>Companhia Aerea</label>
-            <input type="text" class="form-control" name="companhia_aerea">
-          </div>
+            <select class="form-control" name="codigo">
+                {% for voo in voos %}
+                    <option>{{voo.codigo}}</option>
+                {% endfor %}
 
-          <div class="form-group">
-            <label>Código de Voo</label>
-            <input type="text" class="form-control" name="codigo">
-          </div>
+                <option selected="selected"></option>
+            </select>
 
-          <div class="form-group">
-            <label>Origem</label>
-            <input type="text" class="form-control" name="origem">
+            <br/>
+            <label>Dia</label>
+            <input type="date" class="form-control" name="dia">
+            
+            <br/>
+            
+            <button type="submit" class="btn btn-primary">Cadastrar Voo Real</button>
+            </td>
           </div>
-
-          <div class="form-group">
-            <label>Destino</label>
-            <input type="text" class="form-control" name="destino">
-          </div>
-
-          <div class="form-group">
-            <label>Horário de partida prevista</label>
-            <input type="time" class="form-control" name="horario_partida_prevista">
-          </div>
-
-          <div class="form-group">
-            <label>Horário de chegada prevista</label>
-            <input type="time" class="form-control" name="horario_chegada_prevista">
-          </div>
-
-          <button type="submit" class="btn btn-primary">Cadastrar Voo</button>
         </form>
       </div>
     </div>
 </body>
-
 </html>

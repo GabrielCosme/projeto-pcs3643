@@ -32,15 +32,20 @@
             </div>
         </div>
     </nav>
-
+    
     <div class="container">
         <div class="jumbotron">
             <p class="lead">Lista de voos:</p>
-            <hr class="my-4">
-
+            <hr class="my-4">  
         </div>
     </div>
-
+    
+        <div class="container">
+            <div class="jumbotron">
+              <a href="/cadastrarVooReal/" class="btn btn-primary">Cadastrar Voo Real</a>
+            </div>
+        </div>
+    
     <div class="container">
     <div class="jumbotron">
     <table class="table">
@@ -62,13 +67,14 @@
             <td>{{vooReal.dia}}</td>
             <td>{{status_dict|index:vooReal.status}}</td>
             <td></td>
-            <form method="POST" action="/areaDoFuncionario/" id="select">
+            <form method="POST" action="/areaDoFuncionario/">
                 {% csrf_token %}
                 <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
+                <input type="text" name="operation" value="update" hidden>
 
                 <td>
                     <div class="form-group">
-                        <select class="select" form="select" name="status">
+                        <select class="select" name="status">
                             {% for id, status in status_dict.items %}
                                 <option value={{id}}>{{status}}</option>
                             {% endfor %}

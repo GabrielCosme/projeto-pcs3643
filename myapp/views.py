@@ -36,19 +36,30 @@ def areaDoFuncionario(request):
     message = ""
 
     if request.method == "POST":
-        vooReal = VooReal.objects.get(
-            voo=Voo.objects.get(codigo=request.POST.get("codigo", ""))
-        )
-        
-        if int(request.POST.get("status", "")) == vooReal.status + 1 or int(request.POST.get("status", "")) == -1:
-            vooReal.status = request.POST.get("status", "")
-            vooReal.save()
-            message = "Status atualizado com sucesso!"
-        else:
-            message = "Status inválido"
+        if request.POST.get("operation", "") == "create":
+            VooReal.objects.create(
+                voo=Voo.objects.get(codigo=request.POST.get("codigo", "")),
+                dia=request.POST.get("dia", "")
+            )
+        elif request.POST.get("operation", "") == "update":
+            vooReal = VooReal.objects.get(
+                voo=Voo.objects.get(codigo=request.POST.get("codigo", ""))
+            )
+
+            if int(request.POST.get("status", "")) == vooReal.status + 1 or int(request.POST.get("status", "")) == -1:
+                vooReal.status = request.POST.get("status", "")
+                vooReal.save()
+                message = "Status atualizado com sucesso!"
+            else:
+                message = "Status inválido"
 
     context = {"voosReais": VooReal.objects.all(), "status_dict": VooReal.status_dict, "message": message}
     return render(request, "areaDoFuncionario.html", context)
+
+
+def cadastrarVooReal(request):
+    context = {"voos": Voo.objects.all()}
+    return render(request, "cadastrarVooReal.html", context)
 
 
 def areaDoGerente(request):
