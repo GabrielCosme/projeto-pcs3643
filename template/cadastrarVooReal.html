@@ -50,11 +50,11 @@
           <td>
           <div class="form-group">
             <select class="form-control" name="codigo">
+                <option selected></option>
+
                 {% for voo in voos %}
                     <option>{{voo.codigo}}</option>
                 {% endfor %}
-
-                <option selected="selected"></option>
             </select>
 
             <br/>

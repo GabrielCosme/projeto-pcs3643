@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Voo, VooReal
+from datetime import datetime
+import pytz
 
 # Create your views here.
 def bookview(request):
@@ -39,21 +41,39 @@ def areaDoFuncionario(request):
         if request.POST.get("operation", "") == "create":
             VooReal.objects.create(
                 voo=Voo.objects.get(codigo=request.POST.get("codigo", "")),
-                dia=request.POST.get("dia", "")
+                dia=request.POST.get("dia", ""),
             )
         elif request.POST.get("operation", "") == "update":
             vooReal = VooReal.objects.get(
-                voo=Voo.objects.get(codigo=request.POST.get("codigo", ""))
+                voo=Voo.objects.get(codigo=request.POST.get("codigo", "")),
+                dia=request.POST.get("dia", ""),
             )
 
-            if int(request.POST.get("status", "")) == vooReal.status + 1 or int(request.POST.get("status", "")) == -1:
-                vooReal.status = request.POST.get("status", "")
+            if (
+                int(request.POST.get("status", "")) == vooReal.status + 1
+                or int(request.POST.get("status", "")) == -1
+            ):
+                vooReal.status = int(request.POST.get("status", ""))
+
+                if vooReal.status == 7:
+                    vooReal.partida_real = datetime.now(
+                        pytz.timezone("America/Sao_Paulo")
+                    ).time()
+                elif vooReal.status == 8:
+                    vooReal.chegada_real = datetime.now(
+                        pytz.timezone("America/Sao_Paulo")
+                    ).time()
+
                 vooReal.save()
                 message = "Status atualizado com sucesso!"
             else:
                 message = "Status inválido"
 
-    context = {"voosReais": VooReal.objects.all(), "status_dict": VooReal.status_dict, "message": message}
+    context = {
+        "voosReais": VooReal.objects.all(),
+        "status_dict": VooReal.status_dict,
+        "message": message,
+    }
     return render(request, "areaDoFuncionario.html", context)
 
 
@@ -81,9 +101,6 @@ def deletarVoo(request):
 
 def editarVoo(request):
     context = {"voo": Voo.objects.get(codigo=request.GET.get("codigo", ""))}
-    context["voo"].partida_prevista = context["voo"].partida_prevista.strftime("%H:%M")
-    context["voo"].chegada_prevista = context["voo"].chegada_prevista.strftime("%H:%M")
-
     return render(request, "editarVoo.html", context)
 
 

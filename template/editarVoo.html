@@ -70,13 +70,13 @@
 
             <div class="form-group">
                 <label>Horário de partida prevista</label>
-                <input type="time" value="{{voo.partida_prevista}}" class="form-control" name="horario_partida_prevista">
+                <input type="time" value="{{voo.partida_prevista|time:'H:i'}}" class="form-control" name="horario_partida_prevista">
                 
             </div>
 
             <div class="form-group">
                 <label>Horário de chegada prevista</label>
-                <input type="time" value="{{voo.chegada_prevista}}" class="form-control" name="horario_chegada_prevista">
+                <input type="time" value="{{voo.chegada_prevista|time:'H:i'}}" class="form-control" name="horario_chegada_prevista">
             </div>
 
             <br></br>

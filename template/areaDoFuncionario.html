@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Exemplo de integração com Bootstrap</title>
+    <title>Área do Funcionário</title>
 </head>
 
 <body>
@@ -54,9 +54,9 @@
           <tr>
             <th scope="col">Código</th>
             <th scope="col">Dia</th>
-            <th scope="col">Status</th> 
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Partida Real</th>
+            <th scope="col">Chegada Real</th>
+            <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -64,22 +64,21 @@
           {% for vooReal in voosReais %}
           <tr>
             <td>{{vooReal.voo.codigo}}</td>
-            <td>{{vooReal.dia}}</td>
-            <td>{{status_dict|index:vooReal.status}}</td>
-            <td></td>
+            <td>{{vooReal.dia|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{vooReal.partida_real|time:"H:i"}}</td>
+            <td>{{vooReal.chegada_real|time:"H:i"}}</td>
             <form method="POST" action="/areaDoFuncionario/">
                 {% csrf_token %}
-                <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
                 <input type="text" name="operation" value="update" hidden>
+                <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
+                <input type="text" name="dia" value="{{vooReal.dia|date:'Y-m-d'}}" hidden>
 
                 <td>
                     <div class="form-group">
                         <select class="select" name="status">
-                            {% for id, status in status_dict.items %}
-                                <option value={{id}}>{{status}}</option>
+                            {% for id, st in status_dict.items %}
+                                <option {% if vooReal.status  == id %}selected{% endif %} value={{id}}>{{st}}</option>
                             {% endfor %}
-                            
-                            <option selected="selected">{{status_dict|index:vooReal.status}}</option>
                         </select>
 
                         <button onclick="atualizaStatus()" type="submit" class="btn btn-primary">
