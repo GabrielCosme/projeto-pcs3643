@@ -1,13 +1,16 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import Voo, VooReal
 from datetime import datetime
 import pytz
 
-# Create your views here.
+
+@login_required(login_url="/login/")
 def bookview(request):
     return render(request, "telaDeSelecao.html")
 
 
+@permission_required("myapp.change_voo", login_url="/login/")
 def areaDoOperador(request):
     if request.method == "POST":
         if request.POST.get("operation", "") == "create":
@@ -34,6 +37,7 @@ def areaDoOperador(request):
     return render(request, "areaDoOperador.html", context)
 
 
+@permission_required("myapp.change_vooreal", login_url="/login/")
 def areaDoFuncionario(request):
     message = ""
 
@@ -77,6 +81,7 @@ def areaDoFuncionario(request):
     return render(request, "areaDoFuncionario.html", context)
 
 
+@permission_required("myapp.add_vooreal", login_url="/login/")
 def cadastrarVooReal(request):
     context = {"voos": Voo.objects.all()}
     return render(request, "cadastrarVooReal.html", context)
@@ -86,19 +91,23 @@ def areaDoGerente(request):
     return render(request, "areaDoGerente.html")
 
 
+@permission_required("myapp.add_voo", login_url="/login/")
 def cadastrarVoo(request):
     return render(request, "cadastrarVoo.html")
 
 
+@permission_required("myapp.view_voo", login_url="/login/")
 def consultarVoo(request):
     context = {"voo": Voo.objects.get(codigo=request.GET.get("codigo", ""))}
     return render(request, "consultarVoo.html", context)
 
 
+@permission_required("myapp.delete_voo", login_url="/login/")
 def deletarVoo(request):
     return render(request, "deletarVoo.html")
 
 
+@permission_required("myapp.change_voo", login_url="/login/")
 def editarVoo(request):
     context = {"voo": Voo.objects.get(codigo=request.GET.get("codigo", ""))}
     return render(request, "editarVoo.html", context)

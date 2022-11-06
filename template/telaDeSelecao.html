@@ -1,4 +1,5 @@
 {% load static %}
+{% load index %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Sistema de monitoramento</a>
+            <a class="navbar-brand">Sistema de monitoramento</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -32,6 +33,7 @@
                     </li>
                 </ul>
             </div>
+            <a class="navbar-brand" href="/logout/">Logout</a>
         </div>
     </nav>
 
@@ -46,6 +48,7 @@
 
     <div class="container">
         <div class="row">
+          {% if 'operador' in user.groups.all|get_list %}
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
@@ -55,7 +58,10 @@
                     </div>
                 </div>
             </div>
+            <p></p>
+          {% endif %}
 
+          {% if 'funcionario' in user.groups.all|get_list %}
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
@@ -65,9 +71,10 @@
                     </div>
                 </div>
             </div>
-
             <p></p>
+          {% endif %}
 
+          {% if 'gerente' in user.groups.all|get_list %}
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
@@ -77,11 +84,9 @@
                     </div>
                 </div>
             </div>
+            <p></p>
+          {% endif %}
         </div>
     </div>
-    
-
-
 </body>
-
 </html>
