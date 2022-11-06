@@ -139,8 +139,3 @@ def deletarVoo(request):
 def editarVoo(request):
     context = {"voo": Voo.objects.get(codigo=request.GET.get("codigo", ""))}
     return render(request, "editarVoo.html", context)
-
-
-def relatorioVoos(request):
-    # context = {"voosReal": VooReal.objects.all()}
-    return render(request, "relatorioVoos.html")
