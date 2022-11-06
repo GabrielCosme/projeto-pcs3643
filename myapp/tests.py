@@ -4,74 +4,85 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from .models import Voo, VooReal
 
+
 class test_view_login(TestCase):
     def test_login(self):
-        response = self.client.get('/login/')
+        response = self.client.get("/login/")
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_auth(TestCase):
     def test_voos(self):
         User = get_user_model()
-        self.client.login(username='funcionario', password='bola1234')
-        response = self.client.get('/', follow=True)
+        self.client.login(username="funcionario", password="bola1234")
+        response = self.client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_area_do_funcionario(TestCase):
     def test_area_do_funcionario(self):
         User = get_user_model()
-        self.client.login(username='funcionario', password='bola1234')
-        response = self.client.get('/areaDoFuncionario/', follow=True)
+        self.client.login(username="funcionario", password="bola1234")
+        response = self.client.get("/areaDoFuncionario/", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_cadastrar_voo_real(TestCase):
     def test_cadastrar_voo_real(self):
         User = get_user_model()
-        self.client.login(username='funcionario', password='bola1234')
-        response = self.client.get('/cadastrarVooReal/', follow=True)
+        self.client.login(username="funcionario", password="bola1234")
+        response = self.client.get("/cadastrarVooReal/", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_area_do_operador(TestCase):
     def test_area_do_operador(self):
         User = get_user_model()
-        self.client.login(username='operador', password='bola1234')
-        response = self.client.get('/areaDoOperador/', follow=True)
+        self.client.login(username="operador", password="bola1234")
+        response = self.client.get("/areaDoOperador/", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_cadastrar_voo(TestCase):
     def test_cadastrar_voo(self):
         User = get_user_model()
-        self.client.login(username='operador', password='bola1234')
-        response = self.client.get('/cadastrarVoo/', follow=True)
+        self.client.login(username="operador", password="bola1234")
+        response = self.client.get("/cadastrarVoo/", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_consulta_voo(TestCase):
     def test_consultar_voo(self):
         User = get_user_model()
-        self.client.login(username='operador', password='bola1234')
-        response = self.client.get('/consultarVoo/?codigo=ABC1342', follow=True)
+        self.client.login(username="operador", password="bola1234")
+        response = self.client.get("/consultarVoo/?codigo=ABC1342", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_editar_voo(TestCase):
     def test_editar_voo(self):
         User = get_user_model()
-        self.client.login(username='operador', password='bola1234')
-        response = self.client.get('/editarVoo/?codigo=ABC1342', follow=True)
+        self.client.login(username="operador", password="bola1234")
+        response = self.client.get("/editarVoo/?codigo=ABC1342", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_area_do_gerente(TestCase):
     def test_area_do_gerente(self):
         User = get_user_model()
-        self.client.login(username='gerente', password='bola1234')
-        response = self.client.get('/areaDoGerente/', follow=True)
+        self.client.login(username="gerente", password="bola1234")
+        response = self.client.get("/areaDoGerente/", follow=True)
         self.assertEqual(response.status_code, 200)
+
 
 class test_view_tela_relatorio(TestCase):
     def test_tela_relatorio(self):
         User = get_user_model()
-        self.client.login(username='gerente', password='bola1234')
-        response = self.client.get('/telaRelatorio/', follow=True)
+        self.client.login(username="gerente", password="bola1234")
+        response = self.client.get("/telaRelatorio/", follow=True)
         self.assertEqual(response.status_code, 200)
-        
+
+
 class VooTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
