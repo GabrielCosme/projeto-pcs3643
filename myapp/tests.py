@@ -79,7 +79,7 @@ class test_view_tela_relatorio(TestCase):
     def test_tela_relatorio(self):
         User = get_user_model()
         self.client.login(username="gerente", password="bola1234")
-        response = self.client.get("/telaRelatorio/", follow=True)
+        response = self.client.get("/relatorioVoos/", follow=True)
         self.assertEqual(response.status_code, 200)
 
 
