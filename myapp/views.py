@@ -88,8 +88,17 @@ def cadastrarVooReal(request):
 
 
 def areaDoGerente(request):
-    return render(request, "areaDoGerente.html")
+    context = {}
 
+    if request.method == "POST":
+        if request.POST.get("companhia_aerea", "") == "":
+            context = {"voosReal": VooReal.objects.filter(dia__gte = request.POST.get("data_inicio", ""), dia__lte = request.POST.get("data_fim", ""))}
+        elif request.POST.get("data_inicio", "") == "" and request.POST.get("data_fim", "") == "":
+            context = {"voosReal": VooReal.objects.filter(voo__companhia_aerea = request.POST.get("companhia_aerea", ""))}
+        else:
+            context = {"voosReal": VooReal.objects.filter(dia__gte = request.POST.get("data_inicio", ""), dia__lte = request.POST.get("data_fim", ""), voo__companhia_aerea = request.POST.get("companhia_aerea", ""))}
+    
+    return render(request, "areaDoGerente.html", context)
 
 @permission_required("myapp.add_voo", login_url="/login/")
 def cadastrarVoo(request):
@@ -114,4 +123,5 @@ def editarVoo(request):
 
 
 def relatorioVoos(request):
+    #context = {"voosReal": VooReal.objects.all()}
     return render(request, "relatorioVoos.html")

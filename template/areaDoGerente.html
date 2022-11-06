@@ -37,7 +37,15 @@
     <div class="container">
         <div class="jumbotron">
           <h3 class="display-4"> Gerador de relatórios</h3>
-            <p class="lead">Selecione os filtros relevantes</p>
+            <td>Há 3 tipos de relatórios:</td>
+            <br/>
+            <td>1. Por data de início e fim</td>
+            <br/>
+            <td>2. Por companhia aérea</td>
+            <br/>
+            <td>3. Por data de início, data de fim e companhia aérea</td>
+            <br/>
+            <td>Os campos que não forem relevantes para sua pesquisa devem ser deixados em vazio</td>
             <hr class="my-4">
 
         </div>
@@ -47,27 +55,76 @@
     <div class="container">
       <div class="jumbotron">
 
-        <form>
+        <form method="POST" action="/areaDoGerente/">
+          {% csrf_token %}
           <div class="form-group">
             <label>Data de início</label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" name="data_inicio">
 
           </div>
           <div class="form-group">
             <label>Data de fim</label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" name="data_fim">
           </div>
           <div class="form-group">
             <label>Companhia Aerea</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="companhia_aerea">
           </div>
           <br></br>
-          <a href="/relatorioVoos/" class="btn btn-primary" >Gerar relatório</a>
+          <button type="submit" class="btn btn-primary" >Gerar relatório</button>
         </form>
 
 
       </div>
     </div>
+
+    <br/>
+    <br/>
+    <div class="container">
+        <div class="jumbotron">
+            <p class="lead">Lista de voos realizados:</p>
+            <hr class="my-4">
+
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="jumbotron">
+    <table class="table">
+
+        <thead>
+          <tr>
+            <th scope="col">Companhia Aérea</th>
+            <th scope="col">Código do Voo</th>
+            <th scope="col">Origem</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Dia de partida</th>
+            <th scope="col">Horário de partida real</th>
+            <th scope="col">Horário de chegada real</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for vooReal in voosReal %}
+          <tr>
+            <td>{{vooReal.voo.companhia_aerea}}</td>
+            <td>{{vooReal.voo.codigo}}</td>
+            <td>{{vooReal.voo.origem}}</td>
+            <td>{{vooReal.voo.destino}}</td>
+            <td>{{vooReal.dia}}</td>
+            <td>{{vooReal.partida_real}}</td>
+            <td>{{vooReal.chegada_real}}</td>
+          </tr>
+          {%endfor%}
+
+        </tbody>
+        <script>
+  function salvarPdf() {
+    alert("Relatório gerado com sucesso");
+  }
+</script>
+      </table>  
 
    
 </body>

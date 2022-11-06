@@ -57,36 +57,26 @@
             <th scope="col">Código do Voo</th>
             <th scope="col">Origem</th>
             <th scope="col">Destino</th>
-            <th scope="col">Data de partida</th>
-            <th scope="col">Data de chegada</th>
+            <th scope="col">Dia de partida</th>
+            <th scope="col">Horário de partida real</th>
+            <th scope="col">Horário de chegada real</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
+
+          {% for vooReal in voosReal %}
           <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{vooReal.voo.companhia_aerea}}</td>
+            <td>{{vooReal.voo.codigo}}</td>
+            <td>{{vooReal.voo.origem}}</td>
+            <td>{{vooReal.voo.destino}}</td>
+            <td>{{vooReal.dia}}</td>
+            <td>{{vooReal.partida_real}}</td>
+            <td>{{vooReal.chegada_real}}</td>
           </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {%endfor%}
+
         </tbody>
         <script>
   function salvarPdf() {

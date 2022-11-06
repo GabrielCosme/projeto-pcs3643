@@ -34,7 +34,7 @@ urlpatterns = [
     path("consultarVoo/", myapp_views.consultarVoo),
     path("deletarVoo/", myapp_views.deletarVoo),
     path("editarVoo/", myapp_views.editarVoo),
-    path("relatorioVoos/", myapp_views.relatorioVoos),
+    path("relatorioVoos/", myapp_views.areaDoGerente),
     path("areaDoOperador/", myapp_views.areaDoOperador),
     path("areaDoFuncionario/", myapp_views.areaDoFuncionario),
     path("areaDoGerente/", myapp_views.areaDoGerente),

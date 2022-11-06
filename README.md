@@ -69,6 +69,17 @@ Você pode usar os botões de navegação para navegar livremente e clicando no 
 | /areaDoGerente/ | Página de área do gerente |
 | /areaDoOperador/ | Página de área do administrador |
 
+## Logins:
+
+A fim de visualizar as permissões de cada tipo de usuário, foram criados os logins abaixo. Cada usuário tem acesso a sua respectiva área, com exceção do admin que tem acesso a todas as áreas.
+
+| Usuário | Senha |
+| --- | --- |
+| admin | admin |
+| funcionario | bola1234 |
+| operador | bola1234 |
+| gerente | bola1234 |
+
 ## Aula de desenvolvimento 1:
 
 Nesta aula foi realizada a construção inicial do repositório e foi feito o esqueleto dos diretórios, tão como definida a direção futura do projeto.'
@@ -79,3 +90,6 @@ Nesta aula foi feita a criação do modelo de dados do projeto, bem como um CRUD
 
 ## Aula de desenvolvimento 3:
 Nesta aula foi adicionada uma interface front end para login e navegação no site, criando o template para o CRUD dos Voos, para o monitoramento de voos e geração de relatório, mas sem as funcionalidades de fato. Além disso, foi desenvolvido um Modelo de Inteface - Navegação para o projeto.
+
+## Aula de desenvolvimento 4 e 5:
+Nestas aulas foi desenvolvida a implementação do sistema, assim todo os testes necessários para essa etapa
