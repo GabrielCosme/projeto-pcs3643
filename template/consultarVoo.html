@@ -1,4 +1,5 @@
 {% load static %}
+{% load index %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +11,10 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Exemplo de integração com Bootstrap</title>
+    <title>Consulta a Voo</title>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Consulta a Voo</a>
+                        <a class="nav-link">Consulta a Voo</a>
                     </li>
                 </ul>
             </div>
@@ -34,71 +34,52 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Voo XXXX</h3>
-            <p class="lead">Consulta detalhada a voo</p>
+          <h3 class="display-4"> Voo {{voo.codigo}}</h3>
+            <p class="lead">Consulta detalhada ao voo</p>
             <hr class="my-4">
 
         </div>
     </div>
 
     <div class="container">
-    <div class="jumbotron">
-    <table class="table">
+        <div class="jumbotron">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><strong>Companhia Aerea</strong></td>
+                        <td>{{voo.companhia_aerea}}</td>
+                    </tr>
 
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Companhia Aerea</strong></td>
-            <td>LATAM</td>
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Código de voo</strong></td>
+                        <td>{{voo.codigo}}</td>           
+                    </tr>
 
-            <td><strong>Código de voo</strong></td>
-            <td>XXXX</td>           
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Origem</strong></td>
+                        <td>{{voo.origem}}</td>
+                    </tr>
 
-            <td><strong>Status</strong></td>
-            <td>Previsto</td>
-          </td>
-          </tr>
+                    <tr>
+                        <td><strong>Destino</strong></td>
+                        <td>{{voo.destino}}</td>
+                    </tr>
 
-          <tr>
+                    <tr>
+                        <td><strong>Partida prevista</strong></td>
+                        <td>{{voo.partida_prevista|time:"H:i"}}</td>
+                    </tr>
 
-            <td><strong>Origem</strong></td>
-            <td>SP</td>
-          </td>
-          </tr>
-          <tr>
+                    <tr>
+                        <td><strong>Chegada prevista</strong></td>
+                        <td>{{voo.chegada_prevista|time:"H:i"}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <td><strong>Destino</strong></td>
-            <td>Piraporinha</td>
-          </td>
-          </tr>
-          <tr>
-
-            <td><strong>Partida prevista</strong></td>
-            <td>09:00</td>
-          </td>
-
-          <tr>
-
-            <td><strong>Chegada prevista</strong></td>
-            <td>11:00</td>
-          </td>
-          </tr>
-          </tr>
-        </tbody>
-      </table>  
-      <a href="/areaDoOperador/" class="btn btn-primary" >Retornar</a>
-
+            <a href="/areaDoOperador/" class="btn btn-primary" >Retornar</a>
+        </div>
     </div>
-</div>
 </body>
 
 </html>

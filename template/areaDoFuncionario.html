@@ -1,4 +1,5 @@
 {% load static %}
+{% load index %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Exemplo de integração com Bootstrap</title>
+    <title>Área do Funcionário</title>
 </head>
 
 <body>
@@ -25,23 +26,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Área do funcionário</a>
+                        <a class="nav-link">Área do funcionário</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-
-
+    
     <div class="container">
         <div class="jumbotron">
             <p class="lead">Lista de voos:</p>
-            <hr class="my-4">
-
+            <hr class="my-4">  
         </div>
     </div>
-
+    
+        <div class="container">
+            <div class="jumbotron">
+              <a href="/cadastrarVooReal/" class="btn btn-primary">Cadastrar Voo Real</a>
+            </div>
+        </div>
+    
     <div class="container">
     <div class="jumbotron">
     <table class="table">
@@ -50,96 +54,48 @@
           <tr>
             <th scope="col">Código</th>
             <th scope="col">Dia</th>
-            <th scope="col">Status</th> 
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Partida Real</th>
+            <th scope="col">Chegada Real</th>
+            <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td></td>
-            <td>
-              <select class="select">
-                <option value="1">Embarcando</option>
-                <option value="2">Cancelado</option>
-                <option value="3">Programado</option>
-                <option value="4">Taxiando</option>
-                <option value="5">Pronto</option>
-                <option value="6">Autorizado</option>
-                <option value="7">Em Voo</option>
-                <option value="8">Aterrissado</option>
-              </select> 
-              </button><a onclick="atualizaStatus()" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                  <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-                </svg>
-                
-              </a></td>
-          </tr>
-          <tr>
 
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@mdo</td>
-            <td>
-              <select class="select">
-                <option value="1">Embarcando</option>
-                <option value="2">Cancelado</option>
-                <option value="3">Programado</option>
-                <option value="4">Taxiando</option>
-                <option value="5">Pronto</option>
-                <option value="6">Autorizado</option>
-                <option value="7">Em Voo</option>
-                <option value="8">Aterrissado</option>
-              </select> 
-              </button><a onclick="atualizaStatus()" class="btn btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-              </svg>
-              
-            </a></td>
-          </tr>
+          {% for vooReal in voosReais %}
           <tr>
+            <td>{{vooReal.voo.codigo}}</td>
+            <td>{{vooReal.dia|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{vooReal.partida_real|time:"H:i"}}</td>
+            <td>{{vooReal.chegada_real|time:"H:i"}}</td>
+            <form method="POST" action="/areaDoFuncionario/">
+                {% csrf_token %}
+                <input type="text" name="operation" value="update" hidden>
+                <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
+                <input type="text" name="dia" value="{{vooReal.dia|date:'Y-m-d'}}" hidden>
 
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@mdo</td>
-            <td>
-              <select class="select">
-                <option value="1">Embarcando</option>
-                <option value="2">Cancelado</option>
-                <option value="3">Programado</option>
-                <option value="4">Taxiando</option>
-                <option value="5">Pronto</option>
-                <option value="6">Autorizado</option>
-                <option value="7">Em Voo</option>
-                <option value="8">Aterrissado</option>
-              </select> 
-              </button><a onclick="atualizaStatus()" class="btn btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-              </svg>
-              
-            </a></td>
+                <td>
+                    <div class="form-group">
+                        <select class="select" name="status">
+                            {% for id, st in status_dict.items %}
+                                <option {% if vooReal.status  == id %}selected{% endif %} value={{id}}>{{st}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <button onclick="atualizaStatus()" type="submit" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </form>
           </tr>
+          {%endfor%}
         </tbody>
-      </table>  
-
-
-    </div>
+    </table>
+    <p>{{message}}</p>
+  </div>
 </div>
 </body>
-<script>
-  function atualizaStatus() {
-    alert("Voo atualizado com sucesso");
-  }
-</script>
 </html>

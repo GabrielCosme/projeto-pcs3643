@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Cadastro de voos</a>
+                        <a class="nav-link">Cadastro de voos</a>
                     </li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Editar</h3>
+          <h3 class="display-4"> Editar Voo {{voo.codigo}}</h3>
             <p class="lead">Insira os dados do voo:</p>
             <hr class="my-4">
 
@@ -47,55 +47,48 @@
     <div class="container">
       <div class="jumbotron">
 
-        <form>
-          <div class="form-group">
-                <label for="exampleInputPassword1">Companhia Aerea</label>
-                <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Código de Voo</label>
-            <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Origem</label>
-        <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-  </div>    
-  <div class="form-group">
-    <label for="exampleInputPassword1">Destino</label>
-    <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-</div>
-<div class="form-group">
-    <label for="exampleInputPassword1">Status</label>
-    <input type="text" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-</div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Horário de partida prevista</label>
-            <input type="time" value = "valor anterior" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-            
-            <div class="form-group">
-              <label for="exampleInputEmail1">Dia de partida</label>
-              <input type="date" value = "valor anterior" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-  
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Horário de chegada prevista</label>
-            <input type="time" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Dia de chegada</label>
-            <input type="date" value = "valor anterior" class="form-control" id="exampleInputPassword1" >
-          </div>
+        <form method="POST" action="/areaDoOperador/">
+            {% csrf_token %}
 
-          <br></br>
-          <a href="/areaDoOperador/" class="btn btn-primary" >Atualizar</a>
+            <input type="text" name="codigo" value="{{voo.codigo}}" hidden>
+            <input type="text" name="operation" value="update" hidden>
+
+            <div class="form-group">
+                    <label>Companhia Aerea</label>
+                    <input type="text" value="{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea">
+            </div>
+
+            <div class="form-group">
+                <label>Origem</label>
+                <input type="text" value="{{voo.origem}}" class="form-control" name="origem">
+            </div>
+
+            <div class="form-group">
+                <label>Destino</label>
+                <input type="text" value="{{voo.destino}}" class="form-control" name="destino">
+            </div>
+
+            <div class="form-group">
+                <label>Horário de partida prevista</label>
+                <input type="time" value="{{voo.partida_prevista|time:'H:i'}}" class="form-control" name="horario_partida_prevista">
+                
+            </div>
+
+            <div class="form-group">
+                <label>Horário de chegada prevista</label>
+                <input type="time" value="{{voo.chegada_prevista|time:'H:i'}}" class="form-control" name="horario_chegada_prevista">
+            </div>
+
+            <br></br>
+            <button type="submit" class="btn btn-primary" >Atualizar</button>
         </form>
 
+        <br/>
+        <p>{{message}}</p>
 
       </div>
     </div>
 
-   
 </body>
 
 </html>
