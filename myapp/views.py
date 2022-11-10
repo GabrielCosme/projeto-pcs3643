@@ -5,6 +5,44 @@ from datetime import datetime
 import pytz
 
 
+def check_status(vooReal, post_status):
+    if vooReal.voo.tipo == "Partida":
+        if (
+            int(post_status) == vooReal.status + 1 or int(post_status) == -1
+        ) and vooReal.status != 7:
+            vooReal.status = int(post_status)
+
+            if vooReal.status == 7:
+                vooReal.horario_real = datetime.now(
+                    pytz.timezone("America/Sao_Paulo")
+                ).time()
+
+            vooReal.save()
+            return "Status atualizado com sucesso!"
+
+        return "Status inválido"
+
+    if vooReal.voo.tipo == "Chegada":
+        if (
+            int(post_status) == vooReal.status + 1
+            or (
+                vooReal.status == 0
+                and (int(post_status) == 7 or int(post_status) == -1)
+            )
+        ) and vooReal.status != 8:
+            vooReal.status = int(post_status)
+
+            if vooReal.status == 8:
+                vooReal.horario_real = datetime.now(
+                    pytz.timezone("America/Sao_Paulo")
+                ).time()
+
+            vooReal.save()
+            return "Status atualizado com sucesso!"
+
+        return "Status inválido"
+
+
 @login_required(login_url="/login/")
 def bookview(request):
     return render(request, "telaDeSelecao.html")
@@ -22,8 +60,8 @@ def areaDoOperador(request):
                     companhia_aerea=request.POST.get("companhia_aerea", ""),
                     origem=request.POST.get("origem", ""),
                     destino=request.POST.get("destino", ""),
-                    partida_prevista=request.POST.get("horario_partida_prevista", ""),
-                    chegada_prevista=request.POST.get("horario_chegada_prevista", ""),
+                    tipo=request.POST.get("tipo", ""),
+                    horario_previsto=request.POST.get("horario_previsto", ""),
                 )
             except:
                 message = "Não foi possível criar o Voo: Código de Voo já existente"
@@ -34,8 +72,8 @@ def areaDoOperador(request):
             voo.companhia_aerea = request.POST.get("companhia_aerea", "")
             voo.origem = request.POST.get("origem", "")
             voo.destino = request.POST.get("destino", "")
-            voo.partida_prevista = request.POST.get("horario_partida_prevista", "")
-            voo.chegada_prevista = request.POST.get("horario_chegada_prevista", "")
+            voo.tipo = request.POST.get("tipo", "")
+            voo.horario_previsto = request.POST.get("horario_previsto", "")
             voo.save()
 
     context = {"voos": Voo.objects.all(), "message": message}
@@ -61,29 +99,15 @@ def areaDoFuncionario(request):
                 dia=request.POST.get("dia", ""),
             )
 
-            if (
-                int(request.POST.get("status", "")) == vooReal.status + 1
-                or int(request.POST.get("status", "")) == -1
-            ):
-                vooReal.status = int(request.POST.get("status", ""))
-
-                if vooReal.status == 7:
-                    vooReal.partida_real = datetime.now(
-                        pytz.timezone("America/Sao_Paulo")
-                    ).time()
-                elif vooReal.status == 8:
-                    vooReal.chegada_real = datetime.now(
-                        pytz.timezone("America/Sao_Paulo")
-                    ).time()
-
-                vooReal.save()
-                message = "Status atualizado com sucesso!"
-            else:
-                message = "Status inválido"
+            message = check_status(vooReal, request.POST.get("status", ""))
 
     context = {
         "voosReais": VooReal.objects.all(),
-        "status_dict": VooReal.status_dict,
+        "partida_dict": dict(list(VooReal.status_dict.items())[:-1]),
+        "chegada_dict": dict(
+            list(VooReal.status_dict.items())[:2]
+            + list(VooReal.status_dict.items())[-2:]
+        ),
         "message": message,
     }
     return render(request, "areaDoFuncionario.html", context)

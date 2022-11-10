@@ -34,7 +34,7 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Voo {{voo.codigo}}</h3>
+            <h3 class="display-4"> Voo {{voo.codigo}}</h3>
             <p class="lead">Consulta detalhada ao voo</p>
             <hr class="my-4">
 
@@ -52,7 +52,7 @@
 
                     <tr>
                         <td><strong>Código de voo</strong></td>
-                        <td>{{voo.codigo}}</td>           
+                        <td>{{voo.codigo}}</td>
                     </tr>
 
                     <tr>
@@ -66,18 +66,18 @@
                     </tr>
 
                     <tr>
-                        <td><strong>Partida prevista</strong></td>
-                        <td>{{voo.partida_prevista|time:"H:i"}}</td>
+                        <td><strong>Tipo do Voo</strong></td>
+                        <td>{{voo.tipo}}</td>
                     </tr>
 
                     <tr>
-                        <td><strong>Chegada prevista</strong></td>
-                        <td>{{voo.chegada_prevista|time:"H:i"}}</td>
+                        <td><strong>Horário previsto</strong></td>
+                        <td>{{voo.horario_previsto|time:"H:i"}}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <a href="/areaDoOperador/" class="btn btn-primary" >Retornar</a>
+            <a href="/areaDoOperador/" class="btn btn-primary">Retornar</a>
         </div>
     </div>
 </body>

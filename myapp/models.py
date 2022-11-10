@@ -6,8 +6,8 @@ class Voo(models.Model):
     companhia_aerea = models.CharField(max_length=25)
     origem = models.CharField(max_length=25)
     destino = models.CharField(max_length=25)
-    partida_prevista = models.TimeField()
-    chegada_prevista = models.TimeField()
+    tipo = models.TextField(choices=[("Chegada", "Chegada"), ("Partida", "Partida")])
+    horario_previsto = models.TimeField()
 
     class Meta:
         verbose_name = "Voo"
@@ -36,8 +36,7 @@ class VooReal(models.Model):
     voo = models.ForeignKey(Voo, on_delete=models.CASCADE)
     dia = models.DateField()
     status = models.IntegerField(choices=status_choices, default=0)
-    partida_real = models.TimeField(null=True, blank=True)
-    chegada_real = models.TimeField(null=True, blank=True)
+    horario_real = models.TimeField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Voo Real"

@@ -32,11 +32,11 @@
         </div>
     </nav>
 
-    
+
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Editar Voo {{voo.codigo}}</h3>
+            <h3 class="display-4"> Editar Voo {{voo.codigo}}</h3>
             <p class="lead">Insira os dados do voo:</p>
             <hr class="my-4">
 
@@ -45,48 +45,54 @@
 
 
     <div class="container">
-      <div class="jumbotron">
+        <div class="jumbotron">
 
-        <form method="POST" action="/areaDoOperador/">
-            {% csrf_token %}
+            <form method="POST" action="/areaDoOperador/">
+                {% csrf_token %}
 
-            <input type="text" name="codigo" value="{{voo.codigo}}" hidden>
-            <input type="text" name="operation" value="update" hidden>
+                <input type="text" name="codigo" value="{{voo.codigo}}" hidden>
+                <input type="text" name="operation" value="update" hidden>
 
-            <div class="form-group">
+                <div class="form-group">
                     <label>Companhia Aerea</label>
-                    <input type="text" value="{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea" required>
-            </div>
+                    <input type="text" value="{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea"
+                        required>
+                </div>
 
-            <div class="form-group">
-                <label>Origem</label>
-                <input type="text" value="{{voo.origem}}" class="form-control" name="origem" required>
-            </div>
+                <div class="form-group">
+                    <label>Origem</label>
+                    <input type="text" value="{{voo.origem}}" class="form-control" name="origem" required>
+                </div>
 
-            <div class="form-group">
-                <label>Destino</label>
-                <input type="text" value="{{voo.destino}}" class="form-control" name="destino" required>
-            </div>
+                <div class="form-group">
+                    <label>Destino</label>
+                    <input type="text" value="{{voo.destino}}" class="form-control" name="destino" required>
+                </div>
 
-            <div class="form-group">
-                <label>Horário de partida prevista</label>
-                <input type="time" value="{{voo.partida_prevista|time:'H:i'}}" class="form-control" name="horario_partida_prevista" required>
-                
-            </div>
+                <div class="form-group">
+                    <label>Tipo do Voo</label>
+                    <select class="form-control" name="tipo" required>
+                        <option></option>
+                        <option {% if voo.tipo  == "Partida" %}selected{% endif %}>Partida</option>
+                        <option {% if voo.tipo  == "Chegada" %}selected{% endif %}>Chegada</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label>Horário de chegada prevista</label>
-                <input type="time" value="{{voo.chegada_prevista|time:'H:i'}}" class="form-control" name="horario_chegada_prevista" required>
-            </div>
+                <div class="form-group">
+                    <label>Horário previsto</label>
+                    <input type="time" value="{{voo.horario_previsto|time:'H:i'}}" class="form-control"
+                        name="horario_previsto" required>
 
-            <br></br>
-            <button type="submit" class="btn btn-primary" >Atualizar</button>
-        </form>
+                </div>
 
-        <br/>
-        <p>{{message}}</p>
+                <br></br>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </form>
 
-      </div>
+            <br />
+            <p>{{message}}</p>
+
+        </div>
     </div>
 
 </body>

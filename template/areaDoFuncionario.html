@@ -32,71 +32,140 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="container">
+        <br>
+        <p>{{ message }}</p>
+        <br>
         <div class="jumbotron">
-            <p class="lead">Lista de voos:</p>
-            <hr class="my-4">  
+            <a href="/cadastrarVooReal/" class="btn btn-primary">Cadastrar Voo Real</a>
         </div>
     </div>
-    
-        <div class="container">
-            <div class="jumbotron">
-              <a href="/cadastrarVooReal/" class="btn btn-primary">Cadastrar Voo Real</a>
-            </div>
-        </div>
-    
+    <br>
+
     <div class="container">
-    <div class="jumbotron">
-    <table class="table">
+        <div class="jumbotron">
+            <p class="lead">Lista de voos em PARTIDA:</p>
+            <hr class="my-4">
+        </div>
+    </div>
 
-        <thead>
-          <tr>
-            <th scope="col">Código</th>
-            <th scope="col">Dia</th>
-            <th scope="col">Partida Real</th>
-            <th scope="col">Chegada Real</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+        <div class="jumbotron">
+            <table class="table">
 
-          {% for vooReal in voosReais %}
-          <tr>
-            <td>{{vooReal.voo.codigo}}</td>
-            <td>{{vooReal.dia|date:"SHORT_DATE_FORMAT"}}</td>
-            <td>{{vooReal.partida_real|time:"H:i"}}</td>
-            <td>{{vooReal.chegada_real|time:"H:i"}}</td>
-            <form method="POST" action="/areaDoFuncionario/">
-                {% csrf_token %}
-                <input type="text" name="operation" value="update" hidden>
-                <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
-                <input type="text" name="dia" value="{{vooReal.dia|date:'Y-m-d'}}" hidden>
+                <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Horário real</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                <td>
-                    <div class="form-group">
-                        <select class="select" name="status">
-                            {% for id, st in status_dict.items %}
-                                <option {% if vooReal.status  == id %}selected{% endif %} value={{id}}>{{st}}</option>
-                            {% endfor %}
-                        </select>
+                    {% for vooReal in voosReais %}
+                    {% if vooReal.voo.tipo == "Partida" %}
+                    <tr>
+                        <td>{{vooReal.voo.codigo}}</td>
+                        <td>{{vooReal.dia|date:"SHORT_DATE_FORMAT"}}</td>
+                        <td>{{vooReal.horario_real|time:"H:i"}}</td>
+                        <form method="POST" action="/areaDoFuncionario/">
+                            {% csrf_token %}
+                            <input type="text" name="operation" value="update" hidden>
+                            <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
+                            <input type="text" name="dia" value="{{vooReal.dia|date:'Y-m-d'}}" hidden>
 
-                        <button onclick="atualizaStatus()" type="submit" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </td>
-            </form>
-          </tr>
-          {%endfor%}
-        </tbody>
-    </table>
+                            <td>
+                                <div class="form-group">
+                                    <select class="select" name="status">
+                                        {% for id, st in partida_dict.items %}
+                                        <option {% if vooReal.status  == id %}selected{% endif %} value={{id}}>{{st}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
 
-    <p>{{ message }}</p>
-  </div>
-</div>
+                                    <button onclick="atualizaStatus()" type="submit" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                                            <path
+                                                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </form>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron">
+            <p class="lead">Lista de voos em CHEGADA:</p>
+            <hr class="my-4">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Horário real</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for vooReal in voosReais %}
+                    {% if vooReal.voo.tipo == "Chegada" %}
+                    <tr>
+                        <td>{{vooReal.voo.codigo}}</td>
+                        <td>{{vooReal.dia|date:"SHORT_DATE_FORMAT"}}</td>
+                        <td>{{vooReal.horario_real|time:"H:i"}}</td>
+                        <form method="POST" action="/areaDoFuncionario/">
+                            {% csrf_token %}
+                            <input type="text" name="operation" value="update" hidden>
+                            <input type="text" name="codigo" value="{{vooReal.voo.codigo}}" hidden>
+                            <input type="text" name="dia" value="{{vooReal.dia|date:'Y-m-d'}}" hidden>
+
+                            <td>
+                                <div class="form-group">
+                                    <select class="select" name="status">
+                                        {% for id, st in chegada_dict.items %}
+                                        <option {% if vooReal.status  == id %}selected{% endif %} value={{id}}>
+                                            {{st}}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <button onclick="atualizaStatus()" type="submit" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                                            <path
+                                                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </form>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
+
 </html>

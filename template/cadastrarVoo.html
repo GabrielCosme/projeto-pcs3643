@@ -4,83 +4,89 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Área do gerente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <title>Área do gerente</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link">Cadastro de voos</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <div class="jumbotron">
-          <h3 class="display-4"> Cadastrar voo</h3>
-            <p class="lead">Insira os dados do voo:</p>
-            <hr class="my-4">
-
-        </div>
-    </div>
-
-    <div class="container">
-      <div class="jumbotron">
-        <form method="POST" action="/areaDoOperador/">
-          {% csrf_token %}
-          <input type="text" name="operation" value="create" hidden>
-
-          <div class="form-group">
-            <label>Companhia Aerea</label>
-            <input type="text" class="form-control" name="companhia_aerea" required>
-          </div>
-
-          <div class="form-group">
-            <label>Código de Voo</label>
-            <input type="text" class="form-control" name="codigo" required>
-          </div>
-
-          <div class="form-group">
-            <label>Origem</label>
-            <input type="text" class="form-control" name="origem" required>
-          </div>
-
-          <div class="form-group">
-            <label>Destino</label>
-            <input type="text" class="form-control" name="destino" required>
-          </div>
-
-          <div class="form-group">
-            <label>Horário de partida prevista</label>
-            <input type="time" class="form-control" name="horario_partida_prevista" required>
-          </div>
-
-          <div class="form-group">
-            <label>Horário de chegada prevista</label>
-            <input type="time" class="form-control" name="horario_chegada_prevista" required>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Cadastrar Voo</button>
-        </form>
+      <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link">Cadastro de voos</a>
+          </li>
+        </ul>
       </div>
     </div>
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h3 class="display-4"> Cadastrar voo</h3>
+      <p class="lead">Insira os dados do voo:</p>
+      <hr class="my-4">
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="jumbotron">
+      <form method="POST" action="/areaDoOperador/">
+        {% csrf_token %}
+        <input type="text" name="operation" value="create" hidden>
+
+        <div class="form-group">
+          <label>Companhia Aerea</label>
+          <input type="text" class="form-control" name="companhia_aerea" required>
+        </div>
+
+        <div class="form-group">
+          <label>Código de Voo</label>
+          <input type="text" class="form-control" name="codigo" required>
+        </div>
+
+        <div class="form-group">
+          <label>Origem</label>
+          <input type="text" class="form-control" name="origem" required>
+        </div>
+
+        <div class="form-group">
+          <label>Destino</label>
+          <input type="text" class="form-control" name="destino" required>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo do Voo</label>
+          <select class="form-control" name="tipo" required>
+            <option></option>
+            <option>Partida</option>
+            <option>Chegada</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Horário previsto</label>
+          <input type="time" class="form-control" name="horario_previsto" required>
+        </div>
+
+        <br />
+
+        <button type="submit" class="btn btn-primary">Cadastrar Voo</button>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>

@@ -4,91 +4,91 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Área do gerente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <title>Área do gerente</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link">Área do gerente</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <div class="jumbotron">
-          <h3 class="display-4"> Gerador de relatórios</h3>
-            <td>Há 2 tipos de relatórios:</td>
-            <br/>
-            <td>1. Por data de início e fim</td>
-            <br/>
-            <td>2. Por companhia aérea</td>
-            <br/>
-            <td>Os campos que não forem relevantes para sua pesquisa devem ser deixados em vazio</td>
-            <hr class="my-4">
-
-        </div>
-    </div>
-
-
-    <div class="container">
-      <div class="jumbotron">
-
-        <form method="POST" action="/areaDoGerente/">
-          {% csrf_token %}
-          <div class="form-group">
-            <label>Data de início</label>
-            <input type="date" class="form-control" name="data_inicio">
-
-          </div>
-          <div class="form-group">
-            <label>Data de fim</label>
-            <input type="date" class="form-control" name="data_fim">
-          </div>
-          <div class="form-group">
-            <label>Companhia Aerea</label>
-            <input type="text" class="form-control" name="companhia_aerea">
-          </div>
-          <br></br>
-          <button type="submit" class="btn btn-primary" >Gerar relatório</button>
-        </form>
-
-
+      <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link">Área do gerente</a>
+          </li>
+        </ul>
       </div>
     </div>
+  </nav>
 
-    <br/>
-    <br/>
-    <div class="container">
-        <div class="jumbotron">
-            <p class="lead">Lista de voos realizados:</p>
-            <hr class="my-4">
+
+
+  <div class="container">
+    <div class="jumbotron">
+      <h3 class="display-4"> Gerador de relatórios</h3>
+      <td>Há 2 tipos de relatórios:</td>
+      <br />
+      <td>1. Por data de início e fim</td>
+      <br />
+      <td>2. Por companhia aérea</td>
+      <br />
+      <td>Os campos que não forem relevantes para sua pesquisa devem ser deixados em vazio</td>
+      <hr class="my-4">
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="jumbotron">
+
+      <form method="POST" action="/areaDoGerente/">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Data de início</label>
+          <input type="date" class="form-control" name="data_inicio">
 
         </div>
-    </div>
+        <div class="form-group">
+          <label>Data de fim</label>
+          <input type="date" class="form-control" name="data_fim">
+        </div>
+        <div class="form-group">
+          <label>Companhia Aerea</label>
+          <input type="text" class="form-control" name="companhia_aerea">
+        </div>
+        <br></br>
+        <button type="submit" class="btn btn-primary">Gerar relatório</button>
+      </form>
 
-    <div class="container">
+
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <div class="container">
     <div class="jumbotron">
-    <table class="table">
+      <p class="lead">Lista de voos realizados:</p>
+      <hr class="my-4">
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="jumbotron">
+      <table class="table">
 
         <thead>
           <tr>
@@ -97,8 +97,8 @@
             <th scope="col">Origem</th>
             <th scope="col">Destino</th>
             <th scope="col">Dia de partida</th>
-            <th scope="col">Horário de partida real</th>
-            <th scope="col">Horário de chegada real</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Horário real</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -111,20 +111,20 @@
             <td>{{vooReal.voo.origem}}</td>
             <td>{{vooReal.voo.destino}}</td>
             <td>{{vooReal.dia}}</td>
-            <td>{{vooReal.partida_real}}</td>
-            <td>{{vooReal.chegada_real}}</td>
+            <td>{{vooReal.voo.tipo}}</td>
+            <td>{{vooReal.horario_real}}</td>
           </tr>
           {%endfor%}
 
         </tbody>
         <script>
-  function salvarPdf() {
-    alert("Relatório gerado com sucesso");
-  }
-</script>
-      </table>  
+          function salvarPdf() {
+            alert("Relatório gerado com sucesso");
+          }
+        </script>
+      </table>
 
-   
+
 </body>
 
 </html>

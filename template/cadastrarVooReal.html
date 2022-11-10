@@ -34,40 +34,41 @@
 
     <div class="container">
         <div class="jumbotron">
-          <h3 class="display-4"> Cadastrar Voo Real</h3>
+            <h3 class="display-4"> Cadastrar Voo Real</h3>
             <p class="lead">Insira os dados do voo:</p>
             <hr class="my-4">
         </div>
     </div>
 
     <div class="container">
-      <div class="jumbotron">
-        <form method="POST" action="/areaDoFuncionario/">
-          {% csrf_token %}
-          <input type="text" name="operation" value="create" hidden>
+        <div class="jumbotron">
+            <form method="POST" action="/areaDoFuncionario/">
+                {% csrf_token %}
+                <input type="text" name="operation" value="create" hidden>
 
-          <label>Código do Voo</label>
-          <td>
-          <div class="form-group">
-            <select class="form-control" name="codigo" required>
-                <option selected></option>
+                <label>Código do Voo</label>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control" name="codigo" required>
+                            <option selected></option>
 
-                {% for voo in voos %}
-                    <option>{{voo.codigo}}</option>
-                {% endfor %}
-            </select>
+                            {% for voo in voos %}
+                            <option>{{voo.codigo}}</option>
+                            {% endfor %}
+                        </select>
 
-            <br/>
-            <label>Dia</label>
-            <input type="date" class="form-control" name="dia" required>
-            
-            <br/>
-            
-            <button type="submit" class="btn btn-primary">Cadastrar Voo Real</button>
-            </td>
-          </div>
+                        <br />
+                        <label>Dia</label>
+                        <input type="date" class="form-control" name="dia" required>
+
+                        <br />
+
+                        <button type="submit" class="btn btn-primary">Cadastrar Voo Real</button>
+                </td>
+        </div>
         </form>
-      </div>
+    </div>
     </div>
 </body>
+
 </html>
