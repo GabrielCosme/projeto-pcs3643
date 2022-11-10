@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
@@ -57,6 +56,8 @@
             <th scope="col">Cia. Aerea</th>
             <th scope="col">Origem</th>
             <th scope="col">Destino</th>
+            <th scope="col">Partida Prevista</th>
+            <th scope="col">Chegada Prevista</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -68,6 +69,8 @@
             <td>{{voo.companhia_aerea}}</td>
             <td>{{voo.origem}}</td>
             <td>{{voo.destino}}</td>
+            <td>{{voo.partida_prevista|time:"H:i"}}</td>
+            <td>{{voo.chegada_prevista|time:"H:i"}}</td>
 
             <form method="POST" action="/areaDoOperador/" id="select">
                 {% csrf_token %}
@@ -101,16 +104,15 @@
 
         </tbody>
         <script>
-  function deleteSucessful() {
-    alert("Voo deletado com sucesso");
-  }
-</script>
-      </table>  
+            function deleteSucessful() {
+                alert("Voo deletado com sucesso");
+            }
+        </script>
+      </table>
 
-
+      <p>{{ message }}</p>
     </div>
 </div>
 </body>
-
 
 </html>

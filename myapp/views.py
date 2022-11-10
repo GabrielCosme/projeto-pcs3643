@@ -12,16 +12,21 @@ def bookview(request):
 
 @permission_required("myapp.change_voo", login_url="/login/")
 def areaDoOperador(request):
+    message = ""
+
     if request.method == "POST":
         if request.POST.get("operation", "") == "create":
-            Voo.objects.create(
-                codigo=request.POST.get("codigo", ""),
-                companhia_aerea=request.POST.get("companhia_aerea", ""),
-                origem=request.POST.get("origem", ""),
-                destino=request.POST.get("destino", ""),
-                partida_prevista=request.POST.get("horario_partida_prevista", ""),
-                chegada_prevista=request.POST.get("horario_chegada_prevista", ""),
-            )
+            try:
+                Voo.objects.create(
+                    codigo=request.POST.get("codigo", ""),
+                    companhia_aerea=request.POST.get("companhia_aerea", ""),
+                    origem=request.POST.get("origem", ""),
+                    destino=request.POST.get("destino", ""),
+                    partida_prevista=request.POST.get("horario_partida_prevista", ""),
+                    chegada_prevista=request.POST.get("horario_chegada_prevista", ""),
+                )
+            except:
+                message = "Não foi possível criar o Voo: Código de Voo já existente"
         elif request.POST.get("operation", "") == "delete":
             Voo.objects.get(codigo=request.POST.get("codigo", "")).delete()
         elif request.POST.get("operation", "") == "update":
@@ -33,7 +38,7 @@ def areaDoOperador(request):
             voo.chegada_prevista = request.POST.get("horario_chegada_prevista", "")
             voo.save()
 
-    context = {"voos": Voo.objects.all()}
+    context = {"voos": Voo.objects.all(), "message": message}
     return render(request, "areaDoOperador.html", context)
 
 
@@ -43,10 +48,13 @@ def areaDoFuncionario(request):
 
     if request.method == "POST":
         if request.POST.get("operation", "") == "create":
-            VooReal.objects.create(
-                voo=Voo.objects.get(codigo=request.POST.get("codigo", "")),
-                dia=request.POST.get("dia", ""),
-            )
+            try:
+                VooReal.objects.create(
+                    voo=Voo.objects.get(codigo=request.POST.get("codigo", "")),
+                    dia=request.POST.get("dia", ""),
+                )
+            except:
+                message = "Não foi possível criar o VooReal: Combinação de Código de Voo e Dia já existente"
         elif request.POST.get("operation", "") == "update":
             vooReal = VooReal.objects.get(
                 voo=Voo.objects.get(codigo=request.POST.get("codigo", "")),
