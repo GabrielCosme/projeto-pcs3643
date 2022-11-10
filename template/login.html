@@ -3,11 +3,30 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<center>
 <div class="container">
-    <div class="card mt-5" style="width: 15rem;">
-        <div class="card-header">Login</div>
+   
+
+    <div class="card mt-5" style="width: 20rem; height: 225">
+        <div class="card-header" >Login</div>
         <div class="card-body">
-            <form class="form" role="form" method="POST">
+            <form  class="form" role="form" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -15,5 +34,6 @@
         </div>
         </div>
     </div>
+</center>
 </div>
 {% endblock %}
