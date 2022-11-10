@@ -55,28 +55,28 @@
 
             <div class="form-group">
                     <label>Companhia Aerea</label>
-                    <input type="text" value="{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea">
+                    <input type="text" value="{{voo.companhia_aerea}}" class="form-control" name="companhia_aerea" required>
             </div>
 
             <div class="form-group">
                 <label>Origem</label>
-                <input type="text" value="{{voo.origem}}" class="form-control" name="origem">
+                <input type="text" value="{{voo.origem}}" class="form-control" name="origem" required>
             </div>
 
             <div class="form-group">
                 <label>Destino</label>
-                <input type="text" value="{{voo.destino}}" class="form-control" name="destino">
+                <input type="text" value="{{voo.destino}}" class="form-control" name="destino" required>
             </div>
 
             <div class="form-group">
                 <label>Horário de partida prevista</label>
-                <input type="time" value="{{voo.partida_prevista|time:'H:i'}}" class="form-control" name="horario_partida_prevista">
+                <input type="time" value="{{voo.partida_prevista|time:'H:i'}}" class="form-control" name="horario_partida_prevista" required>
                 
             </div>
 
             <div class="form-group">
                 <label>Horário de chegada prevista</label>
-                <input type="time" value="{{voo.chegada_prevista|time:'H:i'}}" class="form-control" name="horario_chegada_prevista">
+                <input type="time" value="{{voo.chegada_prevista|time:'H:i'}}" class="form-control" name="horario_chegada_prevista" required>
             </div>
 
             <br></br>

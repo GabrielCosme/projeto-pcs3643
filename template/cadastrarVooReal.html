@@ -49,7 +49,7 @@
           <label>Código do Voo</label>
           <td>
           <div class="form-group">
-            <select class="form-control" name="codigo">
+            <select class="form-control" name="codigo" required>
                 <option selected></option>
 
                 {% for voo in voos %}
@@ -59,7 +59,7 @@
 
             <br/>
             <label>Dia</label>
-            <input type="date" class="form-control" name="dia">
+            <input type="date" class="form-control" name="dia" required>
             
             <br/>
             
