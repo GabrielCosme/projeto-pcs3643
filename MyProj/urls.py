@@ -38,4 +38,5 @@ urlpatterns = [
     path("areaDoFuncionario/", myapp_views.areaDoFuncionario),
     path("areaDoGerente/", myapp_views.areaDoGerente),
     path("cadastrarVooReal/", myapp_views.cadastrarVooReal),
+    path("painelVoos/", myapp_views.painelVoos),
 ]

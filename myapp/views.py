@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Voo, VooReal
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 
@@ -123,23 +123,11 @@ def areaDoGerente(request):
     context = {}
 
     if request.method == "POST":
-        if request.POST.get("companhia_aerea", "") == "":
-            context = {
-                "voosReal": VooReal.objects.filter(
-                    dia__gte=request.POST.get("data_inicio", ""),
-                    dia__lte=request.POST.get("data_fim", ""),
-                )
-            }
-        elif (
-            request.POST.get("data_inicio", "") == ""
-            and request.POST.get("data_fim", "") == ""
+        if (
+            request.POST.get("companhia_aerea", "") != ""
+            and request.POST.get("data_inicio", "") != ""
+            and request.POST.get("data_fim", "") != ""
         ):
-            context = {
-                "voosReal": VooReal.objects.filter(
-                    voo__companhia_aerea=request.POST.get("companhia_aerea", "")
-                )
-            }
-        else:
             context = {
                 "voosReal": VooReal.objects.filter(
                     dia__gte=request.POST.get("data_inicio", ""),
@@ -147,6 +135,24 @@ def areaDoGerente(request):
                     voo__companhia_aerea=request.POST.get("companhia_aerea", ""),
                 )
             }
+        elif (
+            request.POST.get("data_inicio", "") != ""
+            or request.POST.get("data_fim", "") != ""
+        ):
+            context = {
+                "voosReal": VooReal.objects.filter(
+                    dia__gte=request.POST.get("data_inicio", ""),
+                    dia__lte=request.POST.get("data_fim", ""),
+                )
+            }
+        elif request.POST.get("companhia_aerea", "") != "":
+            context = {
+                "voosReal": VooReal.objects.filter(
+                    voo__companhia_aerea=request.POST.get("companhia_aerea", "")
+                )
+            }
+        else:
+            context = {"voosReal": VooReal.objects.all()}
 
     return render(request, "areaDoGerente.html", context)
 
@@ -171,3 +177,16 @@ def deletarVoo(request):
 def editarVoo(request):
     context = {"voo": Voo.objects.get(codigo=request.GET.get("codigo", ""))}
     return render(request, "editarVoo.html", context)
+
+
+@login_required(login_url="/login/")
+def painelVoos(request):
+    context = {
+        "voosReais": VooReal.objects.filter(
+            voo__horario_previsto__gte=datetime.now() - timedelta(hours=3),
+            voo__horario_previsto__lte=datetime.now() + timedelta(hours=3),
+            dia=datetime.now().date(),
+        ),
+        "status_dict": VooReal.status_dict,
+    }
+    return render(request, "painelVoos.html", context)

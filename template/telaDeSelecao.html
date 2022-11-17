@@ -51,6 +51,17 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Painel de Voos</h5>
+                        <p class="card-text">Espaço para o acompanhamento de partidas e chegadas do aeroporto</p>
+                        <a href="/painelVoos/" class="btn btn-primary">Entrar</a>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+
             {% if 'operador' in user.groups.all|get_list %}
             <div class="col-sm-6">
                 <div class="card">

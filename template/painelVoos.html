@@ -1,0 +1,126 @@
+{% load static %}
+{% load index %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Painel de Voos</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="http://127.0.0.1:8000/">Sistema de monitoramento</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link">Painel de Voos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+
+    <div class="container">
+        <div class="jumbotron">
+            <p class="lead">Aeroporto Internacional de São Paulo</p>
+            <p class="lead">Dia: {% now "j/m/Y" %}</p>
+            <p class="lead">Horário: {% now "H:i" %}</p>
+            <hr class="my-4">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron">
+            <p class="lead">PARTIDAS</p>
+            <hr class="my-4">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Companhia Aérea</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Destino</th>
+                        <th scope="col">Horário previsto</th>
+                        <th scope="col">Horário real</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vooReal in voosReais %}
+                    {% if vooReal.voo.tipo == "Partida" %}
+                    <tr>
+                        <td>{{vooReal.voo.companhia_aerea}}</td>
+                        <td>{{vooReal.voo.codigo}}</td>
+                        <td>{{status_dict|index:vooReal.status}}</td>
+                        <td>{{vooReal.voo.destino}}</td>
+                        <td>{{vooReal.voo.horario_previsto|time:"H:i"}}</td>
+                        <td>{{vooReal.horario_real|time:"H:i"}}</td>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br />
+    <div class="container">
+        <div class="jumbotron">
+            <p class="lead">CHEGADAS</p>
+            <hr class="my-4">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Companhia Aérea</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Origem</th>
+                        <th scope="col">Horário previsto</th>
+                        <th scope="col">Horário real</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vooReal in voosReais %}
+                    {% if vooReal.voo.tipo == "Chegada" %}
+                    <tr>
+                        <td>{{vooReal.voo.companhia_aerea}}</td>
+                        <td>{{vooReal.voo.codigo}}</td>
+                        <td>{{status_dict|index:vooReal.status}}</td>
+                        <td>{{vooReal.voo.origem}}</td>
+                        <td>{{vooReal.voo.horario_previsto|time:"H:i"}}</td>
+                        <td>{{vooReal.horario_real|time:"H:i"}}</td>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
