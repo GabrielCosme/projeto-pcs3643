@@ -77,6 +77,8 @@ A fim de visualizar as permissões de cada tipo de usuário, foram criados os lo
 | --- | --- |
 | admin | admin |
 | funcionario | bola1234 |
+| piloto | bola1234 |
+| torre | bola1234 |
 | operador | bola1234 |
 | gerente | bola1234 |
 
@@ -89,7 +91,13 @@ Nesta aula foi realizada a construção inicial do repositório e foi feito o es
 Nesta aula foi feita a criação do modelo de dados do projeto, bem como um CRUD rudimentar e os testes relativos a seu funcionamento. Além disso, os diagramas foram refatorados visando corrigi-los.
 
 ## Aula de desenvolvimento 3:
+
 Nesta aula foi adicionada uma interface front end para login e navegação no site, criando o template para o CRUD dos Voos, para o monitoramento de voos e geração de relatório, mas sem as funcionalidades de fato. Além disso, foi desenvolvido um Modelo de Inteface - Navegação para o projeto.
 
 ## Aula de desenvolvimento 4 e 5:
+
 Nestas aulas foi desenvolvida a implementação do sistema, assim todo os testes necessários para essa etapa
+
+## Aulas de testes de integração:
+
+Nestas aulas foram realizados todos os testes de integração propostos pelo professor, e realizados os ajustes necessários.
