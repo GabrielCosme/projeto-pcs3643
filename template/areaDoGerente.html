@@ -52,7 +52,6 @@
 
   <div class="container">
     <div class="jumbotron">
-
       <form method="POST" action="/areaDoGerente/">
         {% csrf_token %}
         <div class="form-group">
@@ -70,13 +69,13 @@
         </div>
         <br></br>
         <button type="submit" class="btn btn-primary">Gerar relatório</button>
+        <br></br>
+        <p>{{message}}</p>
       </form>
-
-
     </div>
   </div>
 
-  <br />
+
   <br />
   <div class="container">
     <div class="jumbotron">
@@ -123,8 +122,6 @@
           }
         </script>
       </table>
-
-
 </body>
 
 </html>
