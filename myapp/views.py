@@ -43,7 +43,6 @@ def check_status(vooReal, post_status):
         return "Status inválido"
 
 
-@login_required(login_url="/login/")
 def bookview(request):
     return render(request, "telaDeSelecao.html")
 
@@ -177,7 +176,6 @@ def editarVoo(request):
     return render(request, "editarVoo.html", context)
 
 
-@login_required(login_url="/login/")
 def painelVoos(request):
     context = {
         "voosReais": VooReal.objects.filter(
