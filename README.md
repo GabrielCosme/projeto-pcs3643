@@ -68,6 +68,7 @@ Você pode usar os botões de navegação para navegar livremente e clicando no 
 | /areaDoFuncionario/ | Página de área do funcionário |
 | /areaDoGerente/ | Página de área do gerente |
 | /areaDoOperador/ | Página de área do administrador |
+| /painelVoos/ | Página de painel de voos |
 
 ## Logins:
 
@@ -76,11 +77,11 @@ A fim de visualizar as permissões de cada tipo de usuário, foram criados os lo
 | Usuário | Senha |
 | --- | --- |
 | admin | admin |
-| funcionario | bola1234 |
-| piloto | bola1234 |
-| torre | bola1234 |
-| operador | bola1234 |
-| gerente | bola1234 |
+| funcionario | 1234 |
+| piloto | 1234 |
+| torre | 1234 |
+| operador | 1234 |
+| gerente | 1234 |
 
 ## Aula de desenvolvimento 1:
 
