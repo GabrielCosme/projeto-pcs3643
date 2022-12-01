@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Voo, VooReal
 from django.contrib.auth.models import User, Group, Permission
+from django.http import HttpRequest
 
 
 class test_view_login(TestCase):
@@ -14,11 +15,11 @@ class test_view_login(TestCase):
 class test_view_auth(TestCase):
     @classmethod
     def setUpTestData(cls):
-        user = User.objects.create_user(username="funcionario", password="bola1234")
+        user = User.objects.create_user(username="funcionario", password="1234")
         user.save()
 
     def test_voos(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         response = self.client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "telaDeSelecao.html")
@@ -35,7 +36,7 @@ class test_view_area_do_funcionario(TestCase):
             Permission.objects.get(codename="view_vooreal"),
             Permission.objects.get(codename="view_voo"),
         )
-        user = User.objects.create_user(username="funcionario", password="bola1234")
+        user = User.objects.create_user(username="funcionario", password="1234")
         group.user_set.add(user)
         group.save()
         user.save()
@@ -44,28 +45,27 @@ class test_view_area_do_funcionario(TestCase):
             companhia_aerea="ABC",
             origem="SP",
             destino="MG",
-            partida_prevista="10:00",
-            chegada_prevista="11:00",
+            tipo="Partida",
+            horario_previsto="10:00",
         )
         cls.voo.save()
 
     def test_model_content(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         self.assertEqual(self.voo.codigo, "AA123")
         self.assertEqual(self.voo.companhia_aerea, "ABC")
         self.assertEqual(self.voo.origem, "SP")
         self.assertEqual(self.voo.destino, "MG")
-        self.assertEqual(self.voo.partida_prevista, "10:00")
-        self.assertEqual(self.voo.chegada_prevista, "11:00")
+        self.assertEqual(self.voo.horario_previsto, "10:00")
 
     def test_area_do_funcionario(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         response = self.client.get("/areaDoFuncionario/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "areaDoFuncionario.html")
 
     def test_funcionario_cria_voo_real(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         self.client.post(
             "/areaDoFuncionario/",
             {
@@ -79,7 +79,7 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(VooReal.objects.first().status, 0)
 
     def test_funcionario_altera_voo_real(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         VooReal.objects.create(voo=self.voo, dia="2020-01-01", status=0)
         self.client.post(
             "/areaDoFuncionario/",
@@ -94,7 +94,7 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(VooReal.objects.first().status, 1)
 
     def test_funcionario_altera_ordem_invalida(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         VooReal.objects.create(voo=self.voo, dia="2020-01-01", status=0)
         self.client.post(
             "/areaDoFuncionario/",
@@ -109,7 +109,7 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(VooReal.objects.first().status, 0)
 
     def test_cadastrar_voo_real(self):
-        self.client.login(username="funcionario", password="bola1234")
+        self.client.login(username="funcionario", password="1234", request=HttpRequest())
         response = self.client.get("/cadastrarVooReal/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "cadastrarVooReal.html")
@@ -126,7 +126,7 @@ class test_view_area_do_operador(TestCase):
             Permission.objects.get(codename="view_voo"),
             Permission.objects.get(codename="view_vooreal"),
         )
-        user = User.objects.create_user(username="operador", password="bola1234")
+        user = User.objects.create_user(username="operador", password="1234")
         group.user_set.add(user)
         group.save()
         user.save()
@@ -136,36 +136,36 @@ class test_view_area_do_operador(TestCase):
             companhia_aerea="GOL",
             origem="São Paulo",
             destino="Rio de Janeiro",
-            partida_prevista="12:00",
-            chegada_prevista="13:00",
+            tipo="Chegada",
+            horario_previsto="12:00",
         ).save()
 
     def test_area_do_operador(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         response = self.client.get("/areaDoOperador/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "areaDoOperador.html")
 
     def test_cadastrar_voo(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         response = self.client.get("/cadastrarVoo/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "cadastrarVoo.html")
 
     def test_consultar_voo(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         response = self.client.get("/consultarVoo/?codigo=ABC1342", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "consultarVoo.html")
 
     def test_view_editar_voo(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         response = self.client.get("/editarVoo/?codigo=ABC1342", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "editarVoo.html")
 
     def test_cadastrar_voo(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         self.client.post(
             "/areaDoOperador/",
             {
@@ -174,22 +174,22 @@ class test_view_area_do_operador(TestCase):
                 "codigo": "123",
                 "origem": "sp",
                 "destino": "mg",
-                "horario_partida_prevista": "00:10",
-                "horario_chegada_prevista": "00:30",
+                "tipo": "Chegada",
+                "horario_previsto": "00:10",
             },
             follow=True,
         )
         self.assertEqual(Voo.objects.first().codigo, "123")
 
     def test_editar_voo(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         Voo.objects.create(
             codigo="123",
             companhia_aerea="123",
             origem="sp",
             destino="mg",
-            partida_prevista="00:10",
-            chegada_prevista="00:30",
+            tipo="Chegada",
+            horario_previsto="00:10",
         )
         self.client.post(
             "/areaDoOperador/",
@@ -199,22 +199,22 @@ class test_view_area_do_operador(TestCase):
                 "companhia_aerea": "TAL",
                 "origem": "sp",
                 "destino": "mg",
-                "horario_partida_prevista": "00:10",
-                "horario_chegada_prevista": "00:30",
+                "tipo": "Chegada",
+                "horario_previsto": "00:10",
             },
             follow=True,
         )
         self.assertEqual(Voo.objects.first().companhia_aerea, "TAL")
 
     def test_deletar_voo(self):
-        self.client.login(username="operador", password="bola1234")
+        self.client.login(username="operador", password="1234", request=HttpRequest())
         Voo.objects.create(
             codigo="123",
             companhia_aerea="123",
             origem="sp",
             destino="mg",
-            partida_prevista="00:10",
-            chegada_prevista="00:30",
+            tipo="Chegada",
+            horario_previsto="00:10",
         )
         itemCount = Voo.objects.count()
         self.client.post(
@@ -231,19 +231,19 @@ class test_view_area_do_gerente(TestCase):
             Permission.objects.get(codename="view_voo"),
             Permission.objects.get(codename="view_vooreal"),
         )
-        user = User.objects.create_user(username="gerente", password="bola1234")
+        user = User.objects.create_user(username="gerente", password="1234")
         group.user_set.add(user)
         group.save()
         user.save()
 
     def test_area_do_gerente(self):
-        self.client.login(username="gerente", password="bola1234")
+        self.client.login(username="gerente", password="1234", request=HttpRequest())
         response = self.client.get("/areaDoGerente/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "areaDoGerente.html")
 
     def test_gera_relatorio_data(self):
-        self.client.login(username="gerente", password="bola1234")
+        self.client.login(username="gerente", password="1234", request=HttpRequest())
         response = self.client.post(
             "/areaDoGerente/",
             {
@@ -256,7 +256,7 @@ class test_view_area_do_gerente(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_gera_relatorio_cia_aerea(self):
-        self.client.login(username="gerente", password="bola1234")
+        self.client.login(username="gerente", password="1234", request=HttpRequest())
         response = self.client.post(
             "/areaDoGerente/",
             {"data_inicio": "", "data_fim": "", "companhia_aerea": "GOL"},
@@ -265,7 +265,7 @@ class test_view_area_do_gerente(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_gera_relatorio_misto(self):
-        self.client.login(username="gerente", password="bola1234")
+        self.client.login(username="gerente", password="1234", request=HttpRequest())
         response = self.client.post(
             "/areaDoGerente/",
             {
@@ -286,8 +286,8 @@ class VooTestCase(TestCase):
             companhia_aerea="American Airlines",
             origem="Miami",
             destino="São Paulo",
-            partida_prevista="11:00",
-            chegada_prevista="15:00",
+            tipo="Partida",
+            horario_previsto="11:00",
         )
 
     def test_voo_codigo(self):
@@ -306,13 +306,9 @@ class VooTestCase(TestCase):
         voo = Voo.objects.get(codigo="AA0001")
         self.assertEqual(voo.destino, "São Paulo")
 
-    def test_voo_partida_prevista(self):
+    def test_voo_horario_previsto(self):
         voo = Voo.objects.get(codigo="AA0001")
-        self.assertEqual(voo.partida_prevista.strftime("%H:%M"), "11:00")
-
-    def test_voo_chegada_prevista(self):
-        voo = Voo.objects.get(codigo="AA0001")
-        self.assertEqual(voo.chegada_prevista.strftime("%H:%M"), "15:00")
+        self.assertEqual(voo.horario_previsto.strftime("%H:%M"), "11:00")
 
 
 class VooRealTestCase(TestCase):
@@ -323,15 +319,14 @@ class VooRealTestCase(TestCase):
             companhia_aerea="American Airlines",
             origem="Miami",
             destino="São Paulo",
-            partida_prevista="11:00",
-            chegada_prevista="15:00",
+            tipo="Partida",
+            horario_previsto="11:00",
         )
         VooReal.objects.create(
             voo=voo,
             dia="2020-01-01",
             status=0,
-            partida_real="11:00",
-            chegada_real="15:00",
+            horario_real="11:00",
         )
 
     def test_voo_real_voo(self):
@@ -346,13 +341,9 @@ class VooRealTestCase(TestCase):
         voo_real = VooReal.objects.get(voo="AA0001")
         self.assertEqual(voo_real.status, 0)
 
-    def test_voo_real_partida_real(self):
+    def test_voo_real_horario_real(self):
         voo_real = VooReal.objects.get(voo="AA0001")
-        self.assertEqual(voo_real.partida_real.strftime("%H:%M"), "11:00")
-
-    def test_voo_real_chegada_real(self):
-        voo_real = VooReal.objects.get(voo="AA0001")
-        self.assertEqual(voo_real.chegada_real.strftime("%H:%M"), "15:00")
+        self.assertEqual(voo_real.horario_real.strftime("%H:%M"), "11:00")
 
     def test_voo_real_unique(self):
         voo = Voo.objects.get(codigo="AA0001")
@@ -361,6 +352,5 @@ class VooRealTestCase(TestCase):
                 voo=voo,
                 dia="2020-01-01",
                 status=1,
-                partida_real="12:00",
-                chegada_real="16:00",
+                horario_real="12:00",
             )
