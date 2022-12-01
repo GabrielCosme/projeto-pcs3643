@@ -154,8 +154,8 @@ def areaDoGerente(request):
         else:
             context = {"voosReal": VooReal.objects.all()}
 
-    if not context["voosReal"]:
-        context["message"] = "Nenhum voo encontrado"
+        if not context["voosReal"]:
+            context["message"] = "Nenhum voo encontrado"
 
     return render(request, "areaDoGerente.html", context)
 
