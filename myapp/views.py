@@ -100,6 +100,9 @@ def areaDoFuncionario(request):
             )
 
             message = check_status(vooReal, request.POST.get("status", ""))
+    else:
+        if not vooReal.objects.all():
+            message = "Não há voos cadastrados."
 
     context = {
         "voosReais": VooReal.objects.all(),
