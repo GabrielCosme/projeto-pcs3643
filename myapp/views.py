@@ -123,38 +123,30 @@ def areaDoGerente(request):
     context = {}
 
     if request.method == "POST":
-        if (
-            request.POST.get("companhia_aerea", "") != ""
-            and request.POST.get("data_inicio", "") != ""
-            and request.POST.get("data_fim", "") != ""
-        ):
-            context = {
-                "voosReal": VooReal.objects.filter(
-                    dia__gte=request.POST.get("data_inicio", ""),
-                    dia__lte=request.POST.get("data_fim", ""),
-                    voo__companhia_aerea=request.POST.get("companhia_aerea", ""),
-                )
-            }
-        elif (
-            request.POST.get("data_inicio", "") != ""
-            or request.POST.get("data_fim", "") != ""
-        ):
-            context = {
-                "voosReal": VooReal.objects.filter(
-                    dia__gte=request.POST.get("data_inicio", ""),
-                    dia__lte=request.POST.get("data_fim", ""),
-                )
-            }
-        elif request.POST.get("companhia_aerea", "") != "":
-            context = {
-                "voosReal": VooReal.objects.filter(
-                    voo__companhia_aerea=request.POST.get("companhia_aerea", "")
-                )
-            }
-        else:
-            context = {"voosReal": VooReal.objects.all()}
+        context = {"voosReal": VooReal.objects.all()}
 
-        if not context["voosReal"]:
+        if request.POST.get("data_inicio", "") != "":
+            context["voosReal"] = context["voosReal"].filter(
+                dia__gte=request.POST.get("data_inicio", "")
+            )
+
+        if request.POST.get("data_fim", "") != "":
+            context["voosReal"] = context["voosReal"].filter(
+                dia__lte=request.POST.get("data_fim", "")
+            )
+
+        if request.POST.get("companhia_aerea", "") != "":
+            context["voosReal"] = context["voosReal"].filter(
+                voo__companhia_aerea=request.POST.get("companhia_aerea", "")
+            )
+
+        if (
+            request.POST.get("data_inicio", "") != ""
+            and request.POST.get("data_fim", "") != ""
+            and request.POST.get("data_inicio", "") > request.POST.get("data_fim", "")
+        ):
+            context["message"] = "Data de início não pode ser posterior da data de fim."
+        elif not context["voosReal"]:
             context["message"] = "Nenhum voo encontrado"
 
     return render(request, "areaDoGerente.html", context)
