@@ -19,7 +19,9 @@ class test_view_auth(TestCase):
         user.save()
 
     def test_voos(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         response = self.client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "telaDeSelecao.html")
@@ -51,7 +53,9 @@ class test_view_area_do_funcionario(TestCase):
         cls.voo.save()
 
     def test_model_content(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         self.assertEqual(self.voo.codigo, "AA123")
         self.assertEqual(self.voo.companhia_aerea, "ABC")
         self.assertEqual(self.voo.origem, "SP")
@@ -59,13 +63,17 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(self.voo.horario_previsto, "10:00")
 
     def test_area_do_funcionario(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         response = self.client.get("/areaDoFuncionario/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "areaDoFuncionario.html")
 
     def test_funcionario_cria_voo_real(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         self.client.post(
             "/areaDoFuncionario/",
             {
@@ -79,7 +87,9 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(VooReal.objects.first().status, 0)
 
     def test_funcionario_altera_voo_real(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         VooReal.objects.create(voo=self.voo, dia="2020-01-01", status=0)
         self.client.post(
             "/areaDoFuncionario/",
@@ -94,7 +104,9 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(VooReal.objects.first().status, 1)
 
     def test_funcionario_altera_ordem_invalida(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         VooReal.objects.create(voo=self.voo, dia="2020-01-01", status=0)
         self.client.post(
             "/areaDoFuncionario/",
@@ -109,7 +121,9 @@ class test_view_area_do_funcionario(TestCase):
         self.assertEqual(VooReal.objects.first().status, 0)
 
     def test_cadastrar_voo_real(self):
-        self.client.login(username="funcionario", password="1234", request=HttpRequest())
+        self.client.login(
+            username="funcionario", password="1234", request=HttpRequest()
+        )
         response = self.client.get("/cadastrarVooReal/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "cadastrarVooReal.html")
