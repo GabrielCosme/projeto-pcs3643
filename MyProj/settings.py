@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-fsjzuf_(d*sql(-syh^l%cpl94=ieq-f-w26a32(n7lj5sv)7k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["gabrielcosme.pythonanywhere.com"]
+ALLOWED_HOSTS = ["gabrielcosme.pythonanywhere.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -60,7 +60,7 @@ ROOT_URLCONF = "MyProj.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["template"],
+        "DIRS": [os.path.join(BASE_DIR, "template")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
