@@ -109,9 +109,9 @@
             <td>{{vooReal.voo.codigo}}</td>
             <td>{{vooReal.voo.origem}}</td>
             <td>{{vooReal.voo.destino}}</td>
-            <td>{{vooReal.dia}}</td>
+            <td>{{vooReal.dia|date:"SHORT_DATE_FORMAT"}}</td>
             <td>{{vooReal.voo.tipo}}</td>
-            <td>{{vooReal.horario_real}}</td>
+            <td>{{vooReal.horario_real|time:"H:i"}}</td>
           </tr>
           {%endfor%}
 
