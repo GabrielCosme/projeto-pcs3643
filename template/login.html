@@ -35,12 +35,12 @@
 
 <center>
     <div class="container">
-        <div class="card mt-5" style="width: 18.5rem; height: 225">
+        <div class="card mt-5" style="width: 18.5rem; height: 260">
             <div class="card-header">Login</div>
             <div class="card-body">
                 <form class="form" role="form" method="POST">
                     {% csrf_token %}
-                    <div align="right">
+                    <div align="left">
                         {{ form.as_p }}
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
